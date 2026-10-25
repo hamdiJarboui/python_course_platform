@@ -2,7 +2,7 @@
 
 **Status:** Architecture specification (pre-implementation)  
 **Audience:** Engineering team of 4  
-**Companion document:** TASKS.md
+**Companion documents:** TASKS.md, STYLES.md, TESTING.md, content.md
 
 ---
 
@@ -24,11 +24,11 @@
 - Client-side Python execution only.
 - Deployable as a static site.
 
-**Key assumptions**
-- React + Vite as the frontend foundation.
-- Pyodide loaded from a CDN (with optional self-hosting).
-- localStorage as primary persistence; IndexedDB as optional overflow.
-- Browser print-to-PDF as the primary export path.
+**Companion documents**
+- `TASKS.md` — implementation task breakdown for 4 people across 5 milestones.
+- `STYLES.md` — design tokens, color palette, typography, and theme kickoff specs.
+- `TESTING.md` — unit, component, integration, E2E, and content validation strategy.
+- `content.md` — full Markdown course content source.
 
 ---
 
@@ -45,7 +45,7 @@
 | State management | Zustand | Minimal boilerplate global stores with persistence middleware |
 | Local persistence | localStorage (primary), IndexedDB via idb-keyval (optional overflow) | Simple key/value progress; larger payloads if needed |
 | PDF export | Browser `window.print()` with `@media print` stylesheet | Zero dependencies, print-friendly layout |
-| Testing | Vitest, React Testing Library, Playwright | Unit, component, and E2E coverage |
+| Testing | Vitest, React Testing Library, Playwright | Unit, component, and E2E coverage (see TESTING.md) |
 | Tooling | ESLint, Prettier, TypeScript strict mode | Code quality and type safety |
 
 ---
@@ -110,7 +110,10 @@ Relationships:                                                            │
 python-course-platform/
 ├── README.md
 ├── ARCHITECTURE.md
+├── STYLES.md
+├── TESTING.md
 ├── TASKS.md
+├── content.md
 ├── index.html
 ├── vite.config.ts
 ├── tsconfig.json
@@ -137,59 +140,22 @@ python-course-platform/
 │   │   └── storage.ts           # localStorage / IndexedDB wrappers
 │   ├── components/
 │   │   ├── layout/
-│   │   │   ├── Layout.tsx
-│   │   │   ├── Sidebar.tsx
-│   │   │   ├── Header.tsx
-│   │   │   └── ThemeToggle.tsx
 │   │   ├── course/
-│   │   │   ├── CourseOverview.tsx
-│   │   │   ├── ModuleList.tsx
-│   │   │   ├── LessonPage.tsx
-│   │   │   ├── PrevNextNav.tsx
-│   │   │   └── ResumeBanner.tsx
 │   │   ├── python/
-│   │   │   ├── PythonCodeBlock.tsx
-│   │   │   ├── PythonRunner.tsx
-│   │   │   ├── OutputPanel.tsx
-│   │   │   └── RunResetButtons.tsx
 │   │   ├── quiz/
-│   │   │   ├── QuizPage.tsx
-│   │   │   ├── QuestionRenderer.tsx
-│   │   │   ├── QuizResult.tsx
-│   │   │   └── RetryControl.tsx
 │   │   ├── progress/
-│   │   │   ├── ProgressIndicator.tsx
-│   │   │   └── ExportImportProgress.tsx
 │   │   ├── export/
-│   │   │   └── PdfExportPage.tsx
 │   │   └── ui/
-│   │       ├── Button.tsx
-│   │       ├── Card.tsx
-│   │       ├── Dialog.tsx
-│   │       └── Tooltip.tsx
 │   ├── hooks/
-│   │   ├── useContent.ts
-│   │   ├── useProgress.ts
-│   │   ├── useQuiz.ts
-│   │   ├── usePython.ts
-│   │   └── useTheme.ts
 │   ├── types/
 │   │   └── index.ts             # All shared TypeScript interfaces
 │   ├── styles/
-│   │   ├── globals.css          # Design tokens + dark/light variables
+│   │   ├── globals.css          # Design tokens + dark/light variables (see STYLES.md)
 │   │   ├── print.css            # @media print styles
 │   │   └── code.css             # Code block styling
 │   ├── content/
 │   │   └── courses/
 │   │       └── python-101/
-│   │           ├── course.json
-│   │           ├── modules/
-│   │           │   ├── 01-basics/
-│   │           │   │   ├── module.json
-│   │           │   │   ├── lesson-01.mdx
-│   │           │   │   └── quiz.json
-│   │           │   └── ...
-│   │           └── ...
 │   ├── worker/
 │   │   └── pythonWorker.ts      # Pyodide Web Worker entry point
 │   └── tests/
@@ -288,32 +254,6 @@ Try changing the message above and run it again.
       ],
       "correct": ["a"],
       "explanation": "Use `def` to define functions in Python."
-    },
-    {
-      "id": "q2",
-      "type": "multiple",
-      "prompt": "Which are mutable types?",
-      "options": [
-        { "id": "a", "label": "list" },
-        { "id": "b", "label": "tuple" },
-        { "id": "c", "label": "dict" }
-      ],
-      "correct": ["a", "c"],
-      "explanation": "Lists and dicts are mutable; tuples are not."
-    },
-    {
-      "id": "q3",
-      "type": "true_false",
-      "prompt": "Python is a compiled language only.",
-      "correct": false,
-      "explanation": "Python is typically interpreted (compiled to bytecode)."
-    },
-    {
-      "id": "q4",
-      "type": "short_text",
-      "prompt": "What is the output of `type([])`?",
-      "correct": ["<class 'list'>", "list"],
-      "explanation": "The type of an empty list is `list`."
     }
   ]
 }
@@ -523,7 +463,7 @@ export interface ExecutableCodeBlockProps {
 
 ## 12. Theme System Architecture
 
-**Implementation.** A `data-theme` attribute (`light` | `dark`) is applied to the `<html>` element. CSS variables in `globals.css` define colors, surfaces, and accents for each theme. Components read the variables; no hard-coded theme colors in components.
+**Implementation.** A `data-theme` attribute (`light` | `dark`) is applied to the `<html>` element. CSS variables in `globals.css` define colors, surfaces, and accents for each theme. Components read the variables; no hard-coded theme colors in components. Detailed color palette, typography, and token specs live in `STYLES.md`.
 
 **Persistence.** Theme choice is stored in `localStorage` as `light`, `dark`, or `system`. The toggle writes to both `localStorage` and the Zustand `themeStore`.
 
@@ -531,7 +471,7 @@ export interface ExecutableCodeBlockProps {
 
 **No flash of incorrect theme.** A small inline script in `<head>` runs before React hydration: it reads `localStorage` (or the media query) and sets `data-theme` on `<html>` immediately, so the first paint already matches the chosen theme.
 
-**Python-inspired design tokens.** Colors derived from the Python brand palette: Python blue (`#3776AB`) for primary actions/accents, Python yellow (`#FFD43B`) for highlights/cautions, slate/gray surfaces for backgrounds, with contrast ratios meeting WCAG AA for both themes.
+**Python-inspired design tokens.** Colors derived from the Python brand palette: Python blue (`#3776AB`) for primary actions/accents, Python yellow (`#FFD43B`) for highlights/cautions, slate/gray surfaces for backgrounds, with contrast ratios meeting WCAG AA for both themes. Full token specs in `STYLES.md`.
 
 ---
 
@@ -541,7 +481,7 @@ export interface ExecutableCodeBlockProps {
 
 **Content included.** All modules, lessons (MDX body), code blocks (static source only — no live execution), and quizzes (questions; answers shown or hidden per a print toggle). Navigation, sidebars, theme toggles, and buttons are hidden in print mode.
 
-**Print styling.** `@media print` styles: white background for code blocks, dark text, page-break control (`break-inside: avoid` on code blocks and questions), fitted fonts, URL underlines for links. Code blocks use a high-contrast print-safe theme.
+**Print styling.** `@media print` styles: white background for code blocks, dark text, page-break control (`break-inside: avoid` on code blocks and questions), fitted fonts, URL underlines for links. Code blocks use a high-contrast print-safe theme. Print-specific token overrides live in `STYLES.md`.
 
 **Code blocks and quizzes for export.** Code blocks render the current lesson source (or original source if preferred). Quizzes render as static question lists; interactivity (selection, submission) is necessarily lost.
 
@@ -597,7 +537,9 @@ export interface ExecutableCodeBlockProps {
 
 ---
 
-## 17. Testing Strategy
+## 17. Testing Strategy (summary)
+
+Detailed test plan, tools, coverage goals, and CI configuration live in `TESTING.md`. Summary:
 
 - **Unit tests (Vitest):** Storage helpers, quiz scoring/pass logic, URL/slug generation, theme effective-color-scheme resolution, content schema validation.
 - **Component tests (React Testing Library):** `PythonCodeBlock` run/reset/output flow, `QuizPage` submission and retry, `LessonPage` previous/next navigation, theme toggle persistence.
@@ -617,9 +559,11 @@ export interface ExecutableCodeBlockProps {
 - **Search:** Client-side search over lesson content (e.g., Flexsearch).
 - **Code auto-grading:** Run hidden unit tests against learner code via Pyodide for graded exercises.
 
+---
+
 ## 19. Course Plan
 
-The course plan defines what will be taught and how it is organized. Content is authored in Markdown/MDX under `src/content/courses/python-101/` and validated with zod schemas before being served to learners.
+The course plan defines what will be taught and how it is organized. Content is authored in Markdown/MDX under `src/content/courses/python-101/` and validated with zod schemas before being served to learners. Full lesson content lives in `content.md`.
 
 ### Course Overview
 
