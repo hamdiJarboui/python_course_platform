@@ -616,3 +616,70 @@ export interface ExecutableCodeBlockProps {
 - **Certificates:** Generate PDF certificates on course completion.
 - **Search:** Client-side search over lesson content (e.g., Flexsearch).
 - **Code auto-grading:** Run hidden unit tests against learner code via Pyodide for graded exercises.
+
+## 19. Course Plan
+
+The course plan defines what will be taught and how it is organized. Content is authored in Markdown/MDX under `src/content/courses/python-101/` and validated with zod schemas before being served to learners.
+
+### Course Overview
+
+| Property | Value |
+|---|---|
+| Title | Python Programming Course |
+| Slug | `python-programming-course` |
+| Level | Beginner |
+| Language | English |
+| Theme | Python |
+| Version | 1.0.0 |
+
+### Prerequisites
+
+None. The course assumes no prior programming experience.
+
+### Module Breakdown
+
+The course is organized into 6 modules, each ending with a quiz. Modules and lessons are ordered by an `order` field in their metadata.
+
+| Order | Module | Lessons | Quiz |
+|---|---|---|---|
+| 1 | Introduction to Python | Welcome to the Course, What is Python?, Installing Python, Running Your First Python Program, Understanding Errors | Introduction to Python Quiz (5 questions) |
+| 2 | Python Basics | Variables, Data Types, Numbers and Math, Strings, User Input | Python Basics Quiz (5 questions) |
+| 3 | Control Flow | Boolean Logic, If Statements, Else and Elif, While Loops, For Loops | Control Flow Quiz (5 questions) |
+| 4 | Functions | Defining Functions, Parameters and Arguments, Return Values, Scope, Built-in Functions | Functions Quiz (5 questions) |
+| 5 | Data Structures | Lists, Tuples, Dictionaries, Sets, Choosing the Right Data Structure | Data Structures Quiz (5 questions) |
+| 6 | Final Project | Planning a Python Project, Building a Simple Console Application, Debugging and Improving the Project, Presenting Your Project, Next Steps | Final Project Quiz (5 questions) |
+
+### Lesson Structure
+
+Every lesson follows a consistent structure so the platform can parse and render it reliably:
+
+- Lesson title and estimated time
+- Learning objectives
+- Explanation content
+- At least one runnable Python code block (marked with `python run`)
+- Common mistakes
+- Practice exercise
+- Lesson summary
+- Progress completion marker (`<!-- progress:lesson-complete id="..." -->`)
+
+### Quiz Structure
+
+Every module ends with exactly one quiz. Each quiz:
+
+- Contains at least 5 questions
+- Uses question types: `single-choice`, `multiple-choice`, `true-false`
+- Uses numeric indexes for answers (`correctAnswer` or `correctAnswers`)
+- Includes an explanation for every question
+- Defines a `passingScore` (default 70)
+- Is validated against the zod quiz schema on load
+
+### Learning Path
+
+Learners progress through modules in order. Within a module, lessons are taken in order. Previous/next navigation is computed from the `order` fields. Module completion requires all lessons to be marked complete and the module quiz to be passed. Resume learning redirects to `lastVisitedLessonId` from the progress store.
+
+### Content Files
+
+- `course.json` — course metadata and module list
+- `modules/<id>/module.json` — module metadata and lesson list
+- `modules/<id>/lesson-*.mdx` — lesson content with frontmatter
+- `modules/<id>/quiz.json` — quiz questions and answers
