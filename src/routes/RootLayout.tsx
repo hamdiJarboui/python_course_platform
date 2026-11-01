@@ -1,6 +1,14 @@
 import { useEffect, useRef } from 'react';
 import type { FormEvent } from 'react';
-import { Link, NavLink, Outlet, ScrollRestoration, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import {
+  Link,
+  NavLink,
+  Outlet,
+  ScrollRestoration,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from 'react-router-dom';
 import { Backdrop } from '@/components/Backdrop';
 import { InputProvider } from '@/components/InputDialog';
 import { Logo } from '@/components/Logo';
@@ -20,7 +28,8 @@ function SearchForm() {
       if (e.key !== '/' || e.metaKey || e.ctrlKey || e.altKey) return;
       const el = document.activeElement;
       const typing =
-        el instanceof HTMLElement && (el.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(el.tagName));
+        el instanceof HTMLElement &&
+        (el.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(el.tagName));
       if (typing || el?.closest('.cm-editor')) return;
       e.preventDefault();
       ref.current?.focus();
@@ -114,6 +123,12 @@ export function Component() {
               <NavLink className="nav__link" to="/" end>
                 Courses
               </NavLink>
+              <NavLink className="nav__link" to="/roadmap">
+                Roadmap
+              </NavLink>
+              <NavLink className="nav__link" to="/cheatsheet">
+                Cheatsheet
+              </NavLink>
               <NavLink className="nav__link" to="/progress">
                 Progress
               </NavLink>
@@ -144,6 +159,12 @@ export function Component() {
               </span>
             </span>
             <p>Python in your browser, powered by Pyodide. Your progress stays on this device.</p>
+            <nav className="footer__links" aria-label="Footer">
+              <Link to="/about">About</Link>
+              <Link to="/faq">FAQ</Link>
+              <Link to="/roadmap">Roadmap</Link>
+              <Link to="/cheatsheet">Cheatsheet</Link>
+            </nav>
             <span className="footer__status">
               <span className="pulse-dot" aria-hidden="true" />
               Nothing to install · no account needed

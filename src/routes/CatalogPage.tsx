@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { FaqList } from '@/components/FaqList';
+import { Reveal } from '@/components/Reveal';
 import { SnakeProgress } from '@/components/SnakeProgress';
 import { manifest, targetPath } from '@/content/data';
 import { LEVEL_LABEL } from '@/content/labels';
+import { FEATURES, STEPS } from '@/content/site';
 import { courseProgress, isCourseComplete, resumeTarget } from '@/core/progress';
 import { useProgress } from '@/store/progress';
 
@@ -126,6 +129,65 @@ export function Component() {
           })}
         </ul>
       )}
+
+      <Reveal className="section-block">
+        <div className="section-head">
+          <h2>Everything you need to learn</h2>
+          <p>A complete learning loop in one place.</p>
+        </div>
+        <ul className="feature-grid">
+          {FEATURES.map((f) => (
+            <li key={f.title} className="card feature">
+              <span className="feature__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d={f.icon} />
+                </svg>
+              </span>
+              <h3>{f.title}</h3>
+              <p>{f.text}</p>
+            </li>
+          ))}
+        </ul>
+      </Reveal>
+
+      <Reveal className="section-block">
+        <div className="section-head">
+          <h2>How it works</h2>
+          <p>Three steps, zero setup.</p>
+        </div>
+        <ol className="steps">
+          {STEPS.map((st, i) => (
+            <li key={st.title} className="step">
+              <span className="step__num" aria-hidden="true">
+                {i + 1}
+              </span>
+              <h3>{st.title}</h3>
+              <p>{st.text}</p>
+            </li>
+          ))}
+        </ol>
+      </Reveal>
+
+      <Reveal className="section-block">
+        <div className="section-head">
+          <h2>Quick answers</h2>
+          <Link to="/faq">All questions →</Link>
+        </div>
+        <FaqList limit={3} />
+      </Reveal>
+
+      <Reveal className="cta-band">
+        <h2>Ready to write your first line of Python?</h2>
+        <p>It takes about a minute to get to your first running program.</p>
+        <div className="home-hero__cta">
+          <a className="btn btn--primary btn--lg" href="#courses">
+            Pick a course
+          </a>
+          <Link className="btn btn--lg" to="/roadmap">
+            See the roadmap
+          </Link>
+        </div>
+      </Reveal>
     </div>
   );
 }

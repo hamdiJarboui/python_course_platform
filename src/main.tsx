@@ -9,6 +9,7 @@ import '@/styles/tokens.css';
 import '@/styles/base.css';
 import '@/styles/app.css';
 import '@/styles/future.css';
+import '@/styles/sections.css';
 
 const container = document.getElementById('root');
 if (!container) throw new Error('Missing #root element');

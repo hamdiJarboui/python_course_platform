@@ -23,9 +23,9 @@
   --accent-contrast: #ffffff;
   --accent-grad: linear-gradient(135deg, #1f4e79 0%, #306998 45%, #5b4bd6 100%);
   --highlight: var(--py-yellow);
-  --success: #12804a;
+  --success: #10703f;
   --danger: #c0392b;
-  --warning: #a86a0a;
+  --warning: #8f5206;
   --info: #2b6cb0;
   --success-bg: #e3f6ec;
   --danger-bg: #fdecea;
