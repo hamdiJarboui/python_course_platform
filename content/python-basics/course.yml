@@ -1,0 +1,7 @@
+id: python-basics
+title: Python Basics
+description: Learn Python from zero — run every example right in your browser.
+level: beginner
+version: 1.0.0
+gating: none
+pythonPackages: []

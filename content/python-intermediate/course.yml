@@ -1,0 +1,7 @@
+id: python-intermediate
+title: Python Intermediate
+description: Dictionaries, classes, error handling and the standard library.
+level: intermediate
+version: 1.0.0
+gating: quiz
+pythonPackages: []

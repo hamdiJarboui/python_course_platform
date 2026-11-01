@@ -14,7 +14,7 @@ and a whole course can be downloaded as PDF.
 ## Progress-tracking protocol (MANDATORY)
 Status markers in `tasks.md`: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 
-1. Pick the first `[ ]` task whose dependencies are all `[x]` (or the one marked `[~]`).
+1. Pick the first `[ ]` task **owned by your developer (A or B, see "Team split" in `tasks.md`)** whose dependencies are all `[x]` (or the one marked `[~]`).
 2. Change it to `[~]` and set **Current focus** in `PROGRESS.md` BEFORE writing code.
 3. Work on ONE task at a time. Keep the diff small.
 4. Definition of Done (all required):
