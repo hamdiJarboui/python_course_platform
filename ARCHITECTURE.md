@@ -2,7 +2,7 @@
 
 **Status:** Architecture specification (pre-implementation)  
 **Audience:** Engineering team of 4  
-**Companion documents:** TASKS.md, STYLES.md, TESTING.md, content.md
+**Companion documents:** TASKS.md, STYLES.md, TESTING.md, content.md, kickoff.md, KICKOFF_PROMPTS.md
 
 ---
 
