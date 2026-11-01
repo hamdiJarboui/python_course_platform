@@ -30,7 +30,14 @@ export function Component() {
         <label htmlFor="search-page-q" className="sr-only">
           Search query
         </label>
-        <input id="search-page-q" name="q" type="search" defaultValue={q} key={q} style={{ flex: 1, minWidth: 200 }} />
+        <input
+          id="search-page-q"
+          name="q"
+          type="search"
+          defaultValue={q}
+          key={q}
+          style={{ flex: 1, minWidth: 200 }}
+        />
         <button type="submit" className="btn btn--primary">
           Search
         </button>
@@ -41,7 +48,9 @@ export function Component() {
         {index.status === 'error' && <p>Search is unavailable: {index.error.message}</p>}
         {index.status === 'ready' && q && (
           <p className="meta">
-            {hits.length === 0 ? `No lessons match “${q}”.` : `${hits.length} result${hits.length === 1 ? '' : 's'} for “${q}”`}
+            {hits.length === 0
+              ? `No lessons match “${q}”.`
+              : `${hits.length} result${hits.length === 1 ? '' : 's'} for “${q}”`}
           </p>
         )}
       </div>
@@ -61,7 +70,9 @@ export function Component() {
           ))}
         </ul>
       )}
-      {!q && index.status === 'ready' && <p className="lede">Type a word such as “loop”, “dictionary” or “class”.</p>}
+      {!q && index.status === 'ready' && (
+        <p className="lede">Type a word such as “loop”, “dictionary” or “class”.</p>
+      )}
     </div>
   );
 }

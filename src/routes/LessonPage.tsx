@@ -28,7 +28,8 @@ export function Component() {
         <div className="locked-note" role="status" style={{ marginTop: 24 }}>
           <h1>🔒 This module is locked</h1>
           <p>
-            Pass the quiz for <strong>{previous?.title}</strong> to unlock <strong>{mod.title}</strong>.
+            Pass the quiz for <strong>{previous?.title}</strong> to unlock{' '}
+            <strong>{mod.title}</strong>.
           </p>
           {previous && (
             <Link className="btn btn--primary" to={`/c/${course.id}/${previous.slug}/quiz`}>

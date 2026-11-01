@@ -39,7 +39,10 @@ export function Component() {
     const result = progressStore.getState().importJson(text);
     setMessage(
       result.ok
-        ? { kind: 'ok', text: 'Progress imported. It replaced the progress stored in this browser.' }
+        ? {
+            kind: 'ok',
+            text: 'Progress imported. It replaced the progress stored in this browser.',
+          }
         : { kind: 'error', text: result.error },
     );
     if (fileInput.current) fileInput.current.value = '';
@@ -48,13 +51,18 @@ export function Component() {
   return (
     <div className="container page">
       <h1 className="page-title">Your progress</h1>
-      <p className="lede">Everything is stored in this browser. Export a backup to move to another device.</p>
+      <p className="lede">
+        Everything is stored in this browser. Export a backup to move to another device.
+      </p>
 
       <div className="grid-cards">
         {manifest.courses.map((course) => {
           const f = courseProgress(progress, course);
           const cp = progress.courses[course.id];
-          const lessonsDone = course.modules.reduce((n, m) => n + m.lessons.filter((l) => cp?.lessons[l.id]).length, 0);
+          const lessonsDone = course.modules.reduce(
+            (n, m) => n + m.lessons.filter((l) => cp?.lessons[l.id]).length,
+            0,
+          );
           const lessonsTotal = course.modules.reduce((n, m) => n + m.lessons.length, 0);
           const quizzes = course.modules.map((m) => ({ m, q: cp?.quizzes[m.quiz.id] }));
           const passed = quizzes.filter((x) => x.q?.passed).length;
@@ -66,7 +74,9 @@ export function Component() {
               <h2 className="card__title" id={`pc-${course.id}`}>
                 <Link to={`/c/${course.id}`}>{course.title}</Link>
               </h2>
-              {isCourseComplete(progress, course) && <span className="badge badge--gold">🏆 Course complete</span>}
+              {isCourseComplete(progress, course) && (
+                <span className="badge badge--gold">🏆 Course complete</span>
+              )}
               <SnakeProgress percent={f.percent} label={`${course.title} progress`} />
               <div className="stats">
                 <div className="stat">
@@ -134,12 +144,20 @@ export function Component() {
                     >
                       Yes, reset {course.title}
                     </button>
-                    <button type="button" className="btn btn--sm" onClick={() => setConfirming(null)}>
+                    <button
+                      type="button"
+                      className="btn btn--sm"
+                      onClick={() => setConfirming(null)}
+                    >
                       Cancel
                     </button>
                   </>
                 ) : (
-                  <button type="button" className="btn btn--sm" onClick={() => setConfirming(course.id)}>
+                  <button
+                    type="button"
+                    className="btn btn--sm"
+                    onClick={() => setConfirming(course.id)}
+                  >
                     Reset progress
                   </button>
                 )}
@@ -153,7 +171,10 @@ export function Component() {
         <h2 className="card__title" id="backup">
           Backup &amp; restore
         </h2>
-        <p>Export your progress as a JSON file, or import a file you exported earlier (this replaces current progress).</p>
+        <p>
+          Export your progress as a JSON file, or import a file you exported earlier (this replaces
+          current progress).
+        </p>
         <div className="form-row">
           <button type="button" className="btn btn--primary" onClick={onExport}>
             Export progress

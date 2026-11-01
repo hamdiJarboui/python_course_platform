@@ -46,7 +46,11 @@ export function Component() {
           <li>{course.modules.length} modules</li>
           <li>{course.modules.reduce((n, m) => n + m.lessons.length, 0)} lessons</li>
           <li>≈ {Math.round(course.minutes / 5) * 5} minutes</li>
-          <li>{course.gating === 'quiz' ? 'Pass each quiz to unlock the next module' : 'Learn in any order'}</li>
+          <li>
+            {course.gating === 'quiz'
+              ? 'Pass each quiz to unlock the next module'
+              : 'Learn in any order'}
+          </li>
         </ul>
         <div style={{ maxWidth: 520 }}>
           <SnakeProgress percent={f.percent} label={`${course.title} progress`} />
@@ -54,7 +58,11 @@ export function Component() {
         <div className="hero__actions">
           {target && (
             <Link className="btn btn--primary" to={targetPath(course.id, target)}>
-              {done ? 'Review from the start' : started ? 'Continue where you left off' : 'Start the course'}
+              {done
+                ? 'Review from the start'
+                : started
+                  ? 'Continue where you left off'
+                  : 'Start the course'}
             </Link>
           )}
           <PdfDownload course={course} />
@@ -67,7 +75,12 @@ export function Component() {
         const mp = moduleProgress(progress, course, mod);
         const passed = cp?.quizzes[mod.quiz.id]?.passed === true;
         return (
-          <section key={mod.id} className="toc-module" data-locked={!unlocked} aria-labelledby={`m-${mod.slug}`}>
+          <section
+            key={mod.id}
+            className="toc-module"
+            data-locked={!unlocked}
+            aria-labelledby={`m-${mod.slug}`}
+          >
             <div className="toc-module__head">
               <h3 id={`m-${mod.slug}`} style={{ margin: 0, flex: 1, fontSize: '1.15rem' }}>
                 {!unlocked && <span aria-hidden="true">🔒 </span>}
@@ -133,7 +146,9 @@ export function Component() {
                 )}
               </li>
             </ul>
-            {isModuleComplete(progress, course, mod) && <p className="toc-module__summary">Module complete — great job!</p>}
+            {isModuleComplete(progress, course, mod) && (
+              <p className="toc-module__summary">Module complete — great job!</p>
+            )}
           </section>
         );
       })}

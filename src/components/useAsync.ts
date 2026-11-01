@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 
 export type AsyncState<T> =
-  | { status: 'loading' }
-  | { status: 'error'; error: Error }
-  | { status: 'ready'; data: T };
+  { status: 'loading' } | { status: 'error'; error: Error } | { status: 'ready'; data: T };
 
 /** Loads data when `key` changes. The loader is read from a ref so callers can pass inline closures. */
-export function useAsync<T>(key: string, loader: () => Promise<T>): AsyncState<T> & { reload: () => void } {
+export function useAsync<T>(
+  key: string,
+  loader: () => Promise<T>,
+): AsyncState<T> & { reload: () => void } {
   const [nonce, setNonce] = useState(0);
   const token = `${key}#${nonce}`;
   const [result, setResult] = useState<{ token: string; value: AsyncState<T> } | null>(null);
@@ -23,7 +24,10 @@ export function useAsync<T>(key: string, loader: () => Promise<T>): AsyncState<T
       },
       (e: unknown) => {
         if (!cancelled) {
-          setResult({ token, value: { status: 'error', error: e instanceof Error ? e : new Error(String(e)) } });
+          setResult({
+            token,
+            value: { status: 'error', error: e instanceof Error ? e : new Error(String(e)) },
+          });
         }
       },
     );

@@ -29,16 +29,24 @@ export function useRuntimeState(): RuntimeState {
   );
 }
 
+interface PanelProps {
+  out: OutputState;
+  label?: string;
+  /** Hide status notes (timeout / load failure) the caller already shows elsewhere, and an empty panel. */
+  quiet?: boolean;
+}
+
 /** stdout neutral, stderr danger, result info; announced politely to screen readers. */
-export function OutputPanel({ out, label = 'Output' }: { out: OutputState; label?: string }) {
+export function OutputPanel({ out, label = 'Output', quiet = false }: PanelProps) {
   const rt = useRuntimeState();
   const hasText = out.stdout !== '' || out.stderr !== '' || out.result !== null;
   // A timeout / stop message that Python itself did not print.
-  const note =
-    out.status === 'timeout' || out.status === 'stopped' ? out.error : null;
-  const loadError = out.status === 'error' && out.stderr === '' && out.stdout === '' ? out.error : null;
+  const note = !quiet && (out.status === 'timeout' || out.status === 'stopped') ? out.error : null;
+  const loadError =
+    !quiet && out.status === 'error' && out.stderr === '' && out.stdout === '' ? out.error : null;
 
   if (!out.ran && !out.running) return null;
+  if (quiet && !out.running && !hasText) return null;
   return (
     <div className="cell__output" aria-live="polite" role="region" aria-label={label} data-testid="output">
       <span className="cell__output-label">{label}</span>

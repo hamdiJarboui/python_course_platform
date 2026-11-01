@@ -1,0 +1,2 @@
+title: Working with Files
+summary: Open, write and organise files with open() and pathlib — all inside a sandboxed browser file system.

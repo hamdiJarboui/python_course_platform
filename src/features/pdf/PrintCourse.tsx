@@ -141,7 +141,7 @@ export function PrintCourse({ course }: { course: Course }) {
   return (
     <div className="print-doc" data-testid="print-doc">
       <section className="print-cover">
-        <Logo />
+        <Logo className="print-cover__badge" />
         <span className="badge">Python course · {course.level}</span>
         <h1>{course.title}</h1>
         <p className="lede">{course.description}</p>

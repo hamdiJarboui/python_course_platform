@@ -111,7 +111,7 @@ export function ExerciseCell({ exercise }: { exercise: ExerciseData }) {
           {feedback.kind === 'error' && <strong>{feedback.message}</strong>}
         </div>
       )}
-      <OutputPanel out={out} label="Your program output" />
+      <OutputPanel out={out} label="Your program output" quiet />
 
       {canSolution && (
         <div className="exercise__solution">

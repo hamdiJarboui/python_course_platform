@@ -22,7 +22,10 @@
     "content:build": "tsx scripts/content-build.ts",
     "content:verify": "tsx scripts/content-verify.ts",
     "pdf": "tsx scripts/pdf.ts",
-    "progress": "tsx scripts/progress.ts"
+    "progress": "tsx scripts/progress.ts",
+    "size": "tsx scripts/size-check.ts",
+    "prepare": "husky",
+    "pdf:all": "pnpm build && pnpm pdf"
   },
   "lint-staged": {
     "*.{ts,tsx,js,mjs,cjs}": [

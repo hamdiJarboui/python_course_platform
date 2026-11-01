@@ -41,7 +41,8 @@ export function Component() {
         </p>
         <h1>{mod.quiz.title}</h1>
         <p className="lede">
-          {mod.quiz.questionCount} questions · pass mark {mod.quiz.passScore}% · retake as often as you like.
+          {mod.quiz.questionCount} questions · pass mark {mod.quiz.passScore}% · retake as often as
+          you like.
         </p>
         {!unlocked && prevModule ? (
           <div className="locked-note" role="status">
@@ -57,7 +58,8 @@ export function Component() {
           <>
             {nudge && prevModule && (
               <p className="nudge" role="note">
-                Tip: you have not passed the <Link to={`/c/${course.id}/${prevModule.slug}/quiz`}>{prevModule.title} quiz</Link>{' '}
+                Tip: you have not passed the{' '}
+                <Link to={`/c/${course.id}/${prevModule.slug}/quiz`}>{prevModule.title} quiz</Link>{' '}
                 yet. You can continue, but it is a good way to check your understanding first.
               </p>
             )}
@@ -79,7 +81,10 @@ export function Component() {
                 {...(nextTarget && {
                   next: {
                     to: targetPath(course.id, nextTarget),
-                    label: nextTarget.kind === 'lesson' && nextTarget.moduleSlug !== mod.slug ? 'Start the next module →' : 'Continue →',
+                    label:
+                      nextTarget.kind === 'lesson' && nextTarget.moduleSlug !== mod.slug
+                        ? 'Start the next module →'
+                        : 'Continue →',
                   },
                 })}
               />

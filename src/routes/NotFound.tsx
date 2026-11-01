@@ -39,7 +39,11 @@ export function ErrorPage() {
         <h1>Something went wrong</h1>
         <p>{message}</p>
         <div className="form-row" style={{ justifyContent: 'center' }}>
-          <button type="button" className="btn btn--primary" onClick={() => window.location.reload()}>
+          <button
+            type="button"
+            className="btn btn--primary"
+            onClick={() => window.location.reload()}
+          >
             Reload the page
           </button>
           <Link className="btn" to="/">

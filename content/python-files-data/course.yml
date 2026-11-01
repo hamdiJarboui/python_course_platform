@@ -1,0 +1,7 @@
+id: python-files-data
+title: Files & Data
+description: Read and write files, wrangle CSV, dates and text, and count things like a pro.
+level: intermediate
+version: 1.0.0
+gating: none
+pythonPackages: []
