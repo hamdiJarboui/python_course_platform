@@ -1,0 +1,10 @@
+node_modules
+dist
+coverage
+pnpm-lock.yaml
+src/generated
+public/pdf
+content
+.idea
+playwright-report
+test-results

@@ -1,0 +1,122 @@
+/* Design tokens — see docs/DESIGN_SYSTEM.md. Components must only use these variables. */
+:root,
+[data-theme='light'] {
+  --py-blue: #306998;
+  --py-blue-strong: #1f4e79;
+  --py-yellow: #ffd43b;
+  --py-yellow-deep: #e0b000;
+  --aurora-1: #4b8bbe;
+  --aurora-2: #7c5cff;
+  --aurora-3: #22d3ee;
+
+  --bg: #f4f7fc;
+  --surface: #ffffff;
+  --surface-2: #eaf0f9;
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(48, 105, 152, 0.16);
+  --border: #d5dded;
+  --border-strong: #7f8da6; /* UI borders that must reach 3:1 (inputs, controls) */
+  --text: #131c2b;
+  --text-muted: #52607a;
+  --accent: var(--py-blue);
+  --accent-strong: var(--py-blue-strong);
+  --accent-contrast: #ffffff;
+  --accent-grad: linear-gradient(135deg, #1f4e79 0%, #306998 45%, #5b4bd6 100%);
+  --highlight: var(--py-yellow);
+  --success: #12804a;
+  --danger: #c0392b;
+  --warning: #a86a0a;
+  --info: #2b6cb0;
+  --success-bg: #e3f6ec;
+  --danger-bg: #fdecea;
+  --warning-bg: #fdf5e0;
+  --info-bg: #e8f1fb;
+  --code-bg: #f1f5fb;
+  --code-text: #131c2b;
+  --focus: 0 0 0 3px rgba(48, 105, 152, 0.5);
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.05), 0 8px 24px -8px rgba(31, 78, 121, 0.18);
+  --shadow-lg: 0 2px 4px rgba(16, 24, 40, 0.05), 0 24px 48px -16px rgba(31, 78, 121, 0.28);
+  --glow: 0 0 0 1px rgba(48, 105, 152, 0.35), 0 12px 40px -8px rgba(91, 75, 214, 0.35);
+  --orb-opacity: 0.5;
+  --grid-line: rgba(48, 105, 152, 0.08);
+  --gradient-text: linear-gradient(100deg, #1f4e79 0%, #5b4bd6 55%, #0e8aa8 100%);
+
+  /* Editor syntax colours (AA on --code-bg). */
+  --tok-keyword: #7a2fb0;
+  --tok-string: #0b6e4f;
+  --tok-number: #a8480a;
+  --tok-comment: #566176;
+  --tok-function: #1f4e79;
+  --tok-builtin: #0a5f8a;
+  --tok-operator: #3b4659;
+  --selection: rgba(48, 105, 152, 0.22);
+}
+
+[data-theme='dark'] {
+  --bg: #070b14;
+  --surface: #0f1626;
+  --surface-2: #172138;
+  --glass: rgba(16, 24, 42, 0.62);
+  --glass-border: rgba(140, 170, 255, 0.14);
+  --border: #1f2c46;
+  --border-strong: #6a7fa3;
+  --text: #e9eefb;
+  --text-muted: #9bacc9;
+  --accent: #ffd43b; /* yellow pops on dark */
+  --accent-strong: #ffe173;
+  --accent-contrast: #14171f;
+  --accent-grad: linear-gradient(135deg, #ffd43b 0%, #ffb347 100%);
+  --highlight: #4b8bbe;
+  --success: #4cd698;
+  --danger: #ff7b72;
+  --warning: #e3b341;
+  --info: #7cc0ff;
+  --success-bg: #0d2a20;
+  --danger-bg: #30191d;
+  --warning-bg: #2b2410;
+  --info-bg: #112641;
+  --code-bg: #0a1020;
+  --code-text: #e9eefb;
+  --focus: 0 0 0 3px rgba(255, 212, 59, 0.55);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.5), 0 30px 60px -20px rgba(0, 0, 0, 0.75);
+  --glow: 0 0 0 1px rgba(255, 212, 59, 0.35), 0 12px 48px -8px rgba(124, 92, 255, 0.45);
+  --orb-opacity: 0.38;
+  --grid-line: rgba(140, 170, 255, 0.06);
+  --gradient-text: linear-gradient(100deg, #ffe173 0%, #ffb347 40%, #9ecbff 100%);
+
+  --tok-keyword: #ff9bd0;
+  --tok-string: #a5d6a7;
+  --tok-number: #ffb877;
+  --tok-comment: #8fa3bd;
+  --tok-function: #9ecbff;
+  --tok-builtin: #7fd1f5;
+  --tok-operator: #b8c6da;
+  --selection: rgba(255, 212, 59, 0.22);
+}
+
+:root {
+  --font-ui: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-code: 'JetBrains Mono Variable', 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --measure: 72ch; /* lesson text width */
+  --sidebar-w: 288px;
+  --header-h: 64px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --transition: 200ms var(--ease); /* disabled under reduced motion */
+}
+
+[data-theme='light'] {
+  color-scheme: light;
+}
+[data-theme='dark'] {
+  color-scheme: dark;
+}

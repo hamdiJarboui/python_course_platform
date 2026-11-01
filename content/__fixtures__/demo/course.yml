@@ -1,0 +1,7 @@
+id: demo
+title: Demo Fixture Course
+description: Exercises every content feature. Hidden from the production catalog.
+level: beginner
+version: 1.0.0
+gating: quiz
+pythonPackages: []

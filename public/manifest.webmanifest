@@ -1,0 +1,11 @@
+{
+  "name": "PyCourses",
+  "short_name": "PyCourses",
+  "description": "Learn Python by running code right in your browser.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#0f1620",
+  "theme_color": "#306998",
+  "icons": [{ "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
