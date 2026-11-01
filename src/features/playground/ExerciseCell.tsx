@@ -23,7 +23,9 @@ export function ExerciseCell({ exercise }: { exercise: ExerciseData }) {
   const feedbackRef = useRef<HTMLDivElement>(null);
   const { out, check, stop, clear } = useCodeRunner();
 
-  const solved = useProgress((s) => s.progress.courses[lesson.courseId]?.exercises[exercise.id]?.passed === true);
+  const solved = useProgress(
+    (s) => s.progress.courses[lesson.courseId]?.exercises[exercise.id]?.passed === true,
+  );
   const record = useProgress((s) => s.recordExercise);
 
   useEffect(() => {
@@ -47,7 +49,11 @@ export function ExerciseCell({ exercise }: { exercise: ExerciseData }) {
   const canSolution = exercise.solution !== undefined && (attempts > 0 || solved);
 
   return (
-    <section className="cell exercise" aria-label={`Exercise ${exercise.title ?? exercise.id}`} data-testid="exercise">
+    <section
+      className="cell exercise"
+      aria-label={`Exercise ${exercise.title ?? exercise.id}`}
+      data-testid="exercise"
+    >
       <div className="cell__bar">
         <span className="cell__title exercise__label">
           <span aria-hidden="true">✎</span> Exercise{exercise.title ? `: ${exercise.title}` : ''}
@@ -59,7 +65,11 @@ export function ExerciseCell({ exercise }: { exercise: ExerciseData }) {
               <span aria-hidden="true">■</span> Stop
             </button>
           ) : (
-            <button type="button" className="btn btn--sm btn--primary" onClick={() => void doCheck()}>
+            <button
+              type="button"
+              className="btn btn--sm btn--primary"
+              onClick={() => void doCheck()}
+            >
               <span aria-hidden="true">✓</span> Check
             </button>
           )}
@@ -100,7 +110,12 @@ export function ExerciseCell({ exercise }: { exercise: ExerciseData }) {
           )}
           {feedback.kind === 'fail' && (
             <>
-              <strong>✗ Not quite yet — {feedback.failures.length === 1 ? '1 test failed' : `${feedback.failures.length} tests failed`}</strong>
+              <strong>
+                ✗ Not quite yet —{' '}
+                {feedback.failures.length === 1
+                  ? '1 test failed'
+                  : `${feedback.failures.length} tests failed`}
+              </strong>
               <ul>
                 {feedback.failures.map((f, i) => (
                   <li key={i}>{f.message}</li>

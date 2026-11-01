@@ -45,7 +45,10 @@ export function isCorrect(question: Question, answer: Answer): boolean {
  * Grades a quiz. `answers[i]` belongs to `quiz.questions[i]`; missing entries count as unanswered.
  * The score is the percentage of fully correct questions (no partial credit), rounded.
  */
-export function gradeQuiz(quiz: Pick<Quiz, 'questions' | 'passScore'>, answers: Answer[]): QuizResult {
+export function gradeQuiz(
+  quiz: Pick<Quiz, 'questions' | 'passScore'>,
+  answers: Answer[],
+): QuizResult {
   const results = quiz.questions.map((question, i) => {
     const answer = answers[i];
     return { answered: isAnswered(question, answer), correct: isCorrect(question, answer) };

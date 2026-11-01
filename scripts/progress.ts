@@ -9,7 +9,9 @@ const progressMd = await readFile(`${root}PROGRESS.md`, 'utf8');
 
 const parsed = parseTasks(tasksMd);
 if (parsed.tasks.length === 0) {
-  console.error('No tasks found in tasks.md — is the format `- [ ] **T-001 — Title** · **A**` intact?');
+  console.error(
+    'No tasks found in tasks.md — is the format `- [ ] **T-001 — Title** · **A**` intact?',
+  );
   process.exit(1);
 }
 

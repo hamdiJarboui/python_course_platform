@@ -64,7 +64,9 @@ function isRecord(v: unknown): v is Record<string, unknown> {
 }
 
 /** Upgrades arbitrary parsed JSON to the current schema, or returns `undefined` if impossible. */
-export function migrateProgress(raw: unknown): { progress: ProgressV1; migrated: boolean } | undefined {
+export function migrateProgress(
+  raw: unknown,
+): { progress: ProgressV1; migrated: boolean } | undefined {
   if (!isRecord(raw)) return undefined;
   let data: Record<string, unknown> = raw;
   const startVersion = typeof data['version'] === 'number' ? data['version'] : 0;
@@ -182,7 +184,8 @@ export function createProgressStorage(
       }
       if (isRecord(raw)) delete raw['exportedAt'];
       const result = migrateProgress(raw);
-      if (!result) return { ok: false, error: 'The file is not a valid PyCourses progress export.' };
+      if (!result)
+        return { ok: false, error: 'The file is not a valid PyCourses progress export.' };
       return { ok: true, progress: result.progress };
     },
   };

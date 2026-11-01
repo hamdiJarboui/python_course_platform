@@ -30,7 +30,9 @@ export function CourseNav({ course, currentId, onNavigate }: Props) {
               {mod.title}
               {done && <span className="sr-only"> (completed)</span>}
               {done && <span aria-hidden="true"> ✓</span>}
-              {!unlocked && <span className="sr-only"> (locked until the previous quiz is passed)</span>}
+              {!unlocked && (
+                <span className="sr-only"> (locked until the previous quiz is passed)</span>
+              )}
             </summary>
             <ul>
               {mod.lessons.map((l) => (
@@ -71,7 +73,9 @@ export function CourseNav({ course, currentId, onNavigate }: Props) {
                     </span>
                     <span>
                       Module quiz
-                      {cp?.quizzes[mod.quiz.id]?.passed && <span className="sr-only"> (passed)</span>}
+                      {cp?.quizzes[mod.quiz.id]?.passed && (
+                        <span className="sr-only"> (passed)</span>
+                      )}
                     </span>
                   </Link>
                 ) : (

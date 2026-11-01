@@ -73,7 +73,14 @@ export class PythonRuntime {
       );
       if (out.kind !== 'done') return out.result;
       const { ok, result, error, stdout, stderr } = out.value;
-      return { ...out.base, stdout, stderr, status: ok ? 'ok' : 'error', result, error } satisfies RunResult;
+      return {
+        ...out.base,
+        stdout,
+        stderr,
+        status: ok ? 'ok' : 'error',
+        result,
+        error,
+      } satisfies RunResult;
     });
   }
 
@@ -127,7 +134,10 @@ export class PythonRuntime {
 
   // --------------------------------------------------------------- internals
 
-  private enqueue<T>(signal: AbortSignal | undefined, fn: (ctx: { signal?: AbortSignal }) => Promise<T>): Promise<T> {
+  private enqueue<T>(
+    signal: AbortSignal | undefined,
+    fn: (ctx: { signal?: AbortSignal }) => Promise<T>,
+  ): Promise<T> {
     const next = this.queue.then(() => fn({ ...(signal && { signal }) }));
     this.queue = next.catch(() => undefined);
     return next;
@@ -204,7 +214,11 @@ export class PythonRuntime {
     | { kind: 'done'; value: W; base: Omit<RunResult, 'status' | 'error'> }
     | { kind: 'ended'; result: RunResult }
   > {
-    const empty = (status: RunStatus, error: string | null, extra: Partial<RunResult> = {}): RunResult => ({
+    const empty = (
+      status: RunStatus,
+      error: string | null,
+      extra: Partial<RunResult> = {},
+    ): RunResult => ({
       status,
       stdout: '',
       stderr: '',
@@ -240,9 +254,13 @@ export class PythonRuntime {
       const message = e instanceof Error ? e.message : String(e);
       return {
         kind: 'ended',
-        result: empty('error', `Could not load Python: ${message}. Check your connection and try again.`, {
-          loadFailed: true,
-        }),
+        result: empty(
+          'error',
+          `Could not load Python: ${message}. Check your connection and try again.`,
+          {
+            loadFailed: true,
+          },
+        ),
       };
     }
 
@@ -252,7 +270,9 @@ export class PythonRuntime {
     const execStart = Date.now();
 
     const outcome = await new Promise<
-      { kind: 'value'; value: W } | { kind: 'killed'; status: 'timeout' | 'stopped' } | { kind: 'failed'; error: string }
+      | { kind: 'value'; value: W }
+      | { kind: 'killed'; status: 'timeout' | 'stopped' }
+      | { kind: 'failed'; error: string }
     >((resolve) => {
       let remaining = timeoutMs;
       let armedAt = Date.now();
@@ -285,7 +305,8 @@ export class PythonRuntime {
       arm();
       call(backend.api).then(
         (value) => settle({ kind: 'value', value }),
-        (e: unknown) => settle({ kind: 'failed', error: e instanceof Error ? e.message : String(e) }),
+        (e: unknown) =>
+          settle({ kind: 'failed', error: e instanceof Error ? e.message : String(e) }),
       );
     });
 

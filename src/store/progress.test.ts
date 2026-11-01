@@ -18,7 +18,11 @@ describe('progress store', () => {
     store.getState().setLast('c', 'c/m/l1');
     const saved = JSON.parse(kv.getItem(PROGRESS_KEY) ?? '{}');
     expect(saved.courses.c.lessons['c/m/l1']).toBeDefined();
-    expect(saved.courses.c.quizzes['c/m/99-quiz']).toMatchObject({ best: 90, passed: true, attempts: 1 });
+    expect(saved.courses.c.quizzes['c/m/99-quiz']).toMatchObject({
+      best: 90,
+      passed: true,
+      attempts: 1,
+    });
     expect(saved.courses.c.exercises['ex-1'].passed).toBe(true);
     expect(saved.courses.c.last).toBe('c/m/l1');
   });

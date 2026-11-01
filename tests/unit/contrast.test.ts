@@ -6,10 +6,10 @@ import { describe, expect, it } from 'vitest';
  * Contrast guard for docs/DESIGN_SYSTEM.md: text on surfaces ≥ 4.5:1, UI borders/icons ≥ 3:1,
  * in both themes. Reads the real tokens so a palette tweak cannot silently break accessibility.
  */
-const css = readFileSync(fileURLToPath(new URL('../../src/styles/tokens.css', import.meta.url)), 'utf8').replace(
-  /\/\*[\s\S]*?\*\//g,
-  '',
-);
+const css = readFileSync(
+  fileURLToPath(new URL('../../src/styles/tokens.css', import.meta.url)),
+  'utf8',
+).replace(/\/\*[\s\S]*?\*\//g, '');
 
 type Tokens = Record<string, string>;
 
@@ -17,7 +17,8 @@ function block(selectorPattern: RegExp): Tokens {
   const out: Tokens = {};
   for (const m of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
     if (!selectorPattern.test((m[1] ?? '').trim())) continue;
-    for (const d of (m[2] ?? '').matchAll(/(--[\w-]+)\s*:\s*([^;]+);/g)) out[d[1] as string] = (d[2] as string).trim();
+    for (const d of (m[2] ?? '').matchAll(/(--[\w-]+)\s*:\s*([^;]+);/g))
+      out[d[1] as string] = (d[2] as string).trim();
   }
   return out;
 }
@@ -50,7 +51,9 @@ function parse(color: string): RGBA {
 /** Composites a possibly translucent colour over an opaque background. */
 function over(fg: RGBA, bg: RGBA): RGBA {
   const a = fg[3];
-  return [0, 1, 2].map((i) => Math.round((fg[i] as number) * a + (bg[i] as number) * (1 - a))) .concat(1) as RGBA;
+  return [0, 1, 2]
+    .map((i) => Math.round((fg[i] as number) * a + (bg[i] as number) * (1 - a)))
+    .concat(1) as RGBA;
 }
 
 function luminance([r, g, b]: RGBA): number {
@@ -99,11 +102,14 @@ describe.each(themes)('%s theme contrast', (_name, t) => {
     expect(ratio(solid(link), solid('--bg'))).toBeGreaterThanOrEqual(4.5);
   });
 
-  it.each(['--success', '--danger', '--warning', '--info'])('%s status colour is readable on surfaces and its tint', (name) => {
-    const tint = name.replace('--', '--') + '-bg';
-    expect(ratio(solid(name), solid('--surface'))).toBeGreaterThanOrEqual(4.5);
-    expect(ratio(solid(name), color(t, tint, solid('--surface')))).toBeGreaterThanOrEqual(4.5);
-  });
+  it.each(['--success', '--danger', '--warning', '--info'])(
+    '%s status colour is readable on surfaces and its tint',
+    (name) => {
+      const tint = name.replace('--', '--') + '-bg';
+      expect(ratio(solid(name), solid('--surface'))).toBeGreaterThanOrEqual(4.5);
+      expect(ratio(solid(name), color(t, tint, solid('--surface')))).toBeGreaterThanOrEqual(4.5);
+    },
+  );
 
   it.each(['--text', '--text-muted'])('%s stays readable on status tints', (name) => {
     for (const tint of ['--success-bg', '--danger-bg', '--warning-bg', '--info-bg']) {
@@ -111,12 +117,17 @@ describe.each(themes)('%s theme contrast', (_name, t) => {
     }
   });
 
-  it.each(['--tok-keyword', '--tok-string', '--tok-number', '--tok-comment', '--tok-function', '--tok-builtin', '--tok-operator'])(
-    'syntax colour %s is ≥ 4.5:1 on the code background',
-    (name) => {
-      expect(ratio(solid(name), solid('--code-bg'))).toBeGreaterThanOrEqual(4.5);
-    },
-  );
+  it.each([
+    '--tok-keyword',
+    '--tok-string',
+    '--tok-number',
+    '--tok-comment',
+    '--tok-function',
+    '--tok-builtin',
+    '--tok-operator',
+  ])('syntax colour %s is ≥ 4.5:1 on the code background', (name) => {
+    expect(ratio(solid(name), solid('--code-bg'))).toBeGreaterThanOrEqual(4.5);
+  });
 
   it.each(['--bg', '--surface'])('control borders (--border-strong) on %s are ≥ 3:1', (surface) => {
     expect(ratio(solid('--border-strong'), solid(surface))).toBeGreaterThanOrEqual(3);

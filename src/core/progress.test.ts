@@ -93,7 +93,11 @@ describe('percentages', () => {
   it('counts lessons and quizzes equally', () => {
     const c = course();
     let p = completeLesson(emptyProgress(), 'c', 'c/m1/l1');
-    expect(moduleProgress(p, c, c.modules[0] as Module)).toEqual({ done: 1, total: 3, percent: 33 });
+    expect(moduleProgress(p, c, c.modules[0] as Module)).toEqual({
+      done: 1,
+      total: 3,
+      percent: 33,
+    });
     p = recordQuizAttempt(p, 'c', 'c/m1/99-quiz', { score: 100, passed: true });
     expect(courseProgress(p, c)).toEqual({ done: 2, total: 6, percent: 33 });
   });
@@ -128,7 +132,10 @@ describe('gating', () => {
     const c = course('quiz');
     expect(isModuleUnlocked(emptyProgress(), c, 0)).toBe(true);
     expect(isModuleUnlocked(emptyProgress(), c, 1)).toBe(false);
-    const failed = recordQuizAttempt(emptyProgress(), 'c', 'c/m1/99-quiz', { score: 20, passed: false });
+    const failed = recordQuizAttempt(emptyProgress(), 'c', 'c/m1/99-quiz', {
+      score: 20,
+      passed: false,
+    });
     expect(isModuleUnlocked(failed, c, 1)).toBe(false);
     const passed = recordQuizAttempt(failed, 'c', 'c/m1/99-quiz', { score: 90, passed: true });
     expect(isModuleUnlocked(passed, c, 1)).toBe(true);

@@ -7,7 +7,9 @@ const driver = fileURLToPath(new URL('./driver.py', import.meta.url));
 function findPython(): string | undefined {
   for (const cmd of [process.env['PYTHON'], 'python3', 'python']) {
     if (!cmd) continue;
-    const r = spawnSync(cmd, ['-c', 'import sys; print(sys.version_info >= (3, 9))'], { encoding: 'utf8' });
+    const r = spawnSync(cmd, ['-c', 'import sys; print(sys.version_info >= (3, 9))'], {
+      encoding: 'utf8',
+    });
     if (r.status === 0 && r.stdout.trim() === 'True') return cmd;
   }
   return undefined;
@@ -30,7 +32,10 @@ interface Out {
 }
 
 function drive(ops: Op[]): Out[] {
-  const r = spawnSync(python as string, ['-I', driver], { input: JSON.stringify(ops), encoding: 'utf8' });
+  const r = spawnSync(python as string, ['-I', driver], {
+    input: JSON.stringify(ops),
+    encoding: 'utf8',
+  });
   if (r.status !== 0) throw new Error(`driver failed:\n${r.stderr}`);
   return JSON.parse(r.stdout) as Out[];
 }
@@ -64,7 +69,9 @@ describe.skipIf(!python)('python harness (real CPython)', () => {
   });
 
   it('treats SystemExit as a normal end', () => {
-    expect(one({ op: 'run', code: 'print(1)\nraise SystemExit(0)' }).res).toMatchObject({ ok: true });
+    expect(one({ op: 'run', code: 'print(1)\nraise SystemExit(0)' }).res).toMatchObject({
+      ok: true,
+    });
   });
 
   it('uses a fresh namespace per run unless one is named', () => {
@@ -148,7 +155,9 @@ describe.skipIf(!python)('python harness (real CPython)', () => {
     expect(o.res).toMatchObject({ passed: false });
     expect(String((o.res as { error: string }).error)).toMatch(/SyntaxError/);
     const missing = one({ op: 'exercise', code: 'x = 1', tests: 'assert add(1, 2) == 3' });
-    expect((missing.res as { failures: { message: string }[] }).failures[0]?.message).toContain('NameError');
+    expect((missing.res as { failures: { message: string }[] }).failures[0]?.message).toContain(
+      'NameError',
+    );
   });
 
   it('exercise: runs tests in a fresh namespace each time', () => {

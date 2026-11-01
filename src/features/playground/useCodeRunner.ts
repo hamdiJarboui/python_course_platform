@@ -73,7 +73,11 @@ export function useCodeRunner() {
   );
 
   const check = useCallback(
-    async ({ code, tests, timeoutMs }: RunOptions & { tests: string }): Promise<ExerciseResult | undefined> => {
+    async ({
+      code,
+      tests,
+      timeoutMs,
+    }: RunOptions & { tests: string }): Promise<ExerciseResult | undefined> => {
       const ctl = base();
       const res = await runtime.runExercise(
         {

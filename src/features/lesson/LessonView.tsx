@@ -18,7 +18,8 @@ import 'katex/dist/katex.min.css';
 function Prose({ html }: { html: string }) {
   const navigate = useNavigate();
   const onClick = (e: MouseEvent<HTMLDivElement>): void => {
-    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)
+      return;
     const a = (e.target as HTMLElement).closest('a[data-internal]');
     if (!(a instanceof HTMLAnchorElement)) return;
     e.preventDefault();
@@ -137,7 +138,9 @@ export function LessonView({ course, mod, lesson }: Props) {
             type="button"
             className={`btn ${complete ? '' : 'btn--primary'}`}
             aria-pressed={complete}
-            onClick={() => (complete ? uncomplete(course.id, lesson.id) : markComplete(course.id, lesson.id))}
+            onClick={() =>
+              complete ? uncomplete(course.id, lesson.id) : markComplete(course.id, lesson.id)
+            }
           >
             {complete ? '✓ Completed (click to undo)' : 'Mark complete'}
           </button>

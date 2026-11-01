@@ -48,7 +48,13 @@ export function OutputPanel({ out, label = 'Output', quiet = false }: PanelProps
   if (!out.ran && !out.running) return null;
   if (quiet && !out.running && !hasText) return null;
   return (
-    <div className="cell__output" aria-live="polite" role="region" aria-label={label} data-testid="output">
+    <div
+      className="cell__output"
+      aria-live="polite"
+      role="region"
+      aria-label={label}
+      data-testid="output"
+    >
       <span className="cell__output-label">{label}</span>
       {out.running && (
         <p className="out-status">
@@ -61,7 +67,9 @@ export function OutputPanel({ out, label = 'Output', quiet = false }: PanelProps
       {out.result !== null && <pre className="out-result">{`→ ${out.result}`}</pre>}
       {note && <p className="out-stderr">{note}</p>}
       {loadError && <p className="out-stderr">{loadError}</p>}
-      {!out.running && out.ran && !hasText && !note && !loadError && <p className="out-empty">(no output)</p>}
+      {!out.running && out.ran && !hasText && !note && !loadError && (
+        <p className="out-empty">(no output)</p>
+      )}
     </div>
   );
 }

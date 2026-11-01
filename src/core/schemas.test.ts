@@ -26,7 +26,9 @@ describe('courseYmlSchema', () => {
 
 describe('lessonFrontmatterSchema', () => {
   it('requires at least one objective', () => {
-    expect(lessonFrontmatterSchema.safeParse({ title: 'x', minutes: 5, objectives: [] }).success).toBe(false);
+    expect(
+      lessonFrontmatterSchema.safeParse({ title: 'x', minutes: 5, objectives: [] }).success,
+    ).toBe(false);
     expect(
       lessonFrontmatterSchema.parse({ title: 'x', minutes: 5, objectives: ['a'] }),
     ).toMatchObject({ scope: 'cell', concept: false });
@@ -35,16 +37,34 @@ describe('lessonFrontmatterSchema', () => {
 
 describe('questionSchema', () => {
   it('rejects an out-of-range single answer', () => {
-    const r = questionSchema.safeParse({ type: 'single', q: 'q', options: ['a', 'b'], answer: 2, explain: 'e' });
+    const r = questionSchema.safeParse({
+      type: 'single',
+      q: 'q',
+      options: ['a', 'b'],
+      answer: 2,
+      explain: 'e',
+    });
     expect(r.success).toBe(false);
     expect(r.error?.issues[0]?.message).toContain('out of range');
   });
   it('rejects out-of-range or duplicate multiple answers', () => {
     expect(
-      questionSchema.safeParse({ type: 'multiple', q: 'q', options: ['a', 'b'], answer: [0, 5], explain: 'e' }).success,
+      questionSchema.safeParse({
+        type: 'multiple',
+        q: 'q',
+        options: ['a', 'b'],
+        answer: [0, 5],
+        explain: 'e',
+      }).success,
     ).toBe(false);
     expect(
-      questionSchema.safeParse({ type: 'multiple', q: 'q', options: ['a', 'b'], answer: [0, 0], explain: 'e' }).success,
+      questionSchema.safeParse({
+        type: 'multiple',
+        q: 'q',
+        options: ['a', 'b'],
+        answer: [0, 0],
+        explain: 'e',
+      }).success,
     ).toBe(false);
   });
   it('requires explain', () => {

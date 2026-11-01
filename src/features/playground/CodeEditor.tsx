@@ -1,4 +1,9 @@
-import { autocompletion, closeBrackets, closeBracketsKeymap, completionKeymap } from '@codemirror/autocomplete';
+import {
+  autocompletion,
+  closeBrackets,
+  closeBracketsKeymap,
+  completionKeymap,
+} from '@codemirror/autocomplete';
 import {
   defaultKeymap,
   history,
@@ -27,11 +32,17 @@ import { useEffect, useRef } from 'react';
 
 /** Token colours come from CSS variables, so the editor follows the light/dark theme for free. */
 const highlight = HighlightStyle.define([
-  { tag: [t.keyword, t.controlKeyword, t.definitionKeyword, t.moduleKeyword], color: 'var(--tok-keyword)' },
+  {
+    tag: [t.keyword, t.controlKeyword, t.definitionKeyword, t.moduleKeyword],
+    color: 'var(--tok-keyword)',
+  },
   { tag: [t.string, t.special(t.string)], color: 'var(--tok-string)' },
   { tag: [t.number, t.bool, t.null], color: 'var(--tok-number)' },
   { tag: t.comment, color: 'var(--tok-comment)', fontStyle: 'italic' },
-  { tag: [t.function(t.variableName), t.definition(t.variableName), t.className], color: 'var(--tok-function)' },
+  {
+    tag: [t.function(t.variableName), t.definition(t.variableName), t.className],
+    color: 'var(--tok-function)',
+  },
   { tag: [t.standard(t.variableName), t.self], color: 'var(--tok-builtin)' },
   { tag: [t.operator, t.punctuation], color: 'var(--tok-operator)' },
 ]);

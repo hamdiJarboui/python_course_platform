@@ -12,7 +12,8 @@ const files = new Set<string>();
 for (const m of html.matchAll(/<(?:script|link)[^>]+(?:src|href)="([^"]+\.js)"/g)) {
   files.add((m[1] as string).replace(/^.*?\/assets\//, 'assets/'));
 }
-if (files.size === 0) throw new Error('No scripts found in dist/index.html — run `pnpm build` first');
+if (files.size === 0)
+  throw new Error('No scripts found in dist/index.html — run `pnpm build` first');
 
 let total = 0;
 for (const f of files) {

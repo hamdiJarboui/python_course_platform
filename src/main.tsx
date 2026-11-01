@@ -10,6 +10,7 @@ import '@/styles/base.css';
 import '@/styles/app.css';
 import '@/styles/future.css';
 import '@/styles/sections.css';
+import '@/styles/polish.css';
 
 const container = document.getElementById('root');
 if (!container) throw new Error('Missing #root element');

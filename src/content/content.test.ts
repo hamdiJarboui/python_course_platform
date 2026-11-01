@@ -228,7 +228,13 @@ describe('real course content', () => {
     const r = await compileContent(files, { includeFixtures: true });
     expect(r.errors.map(String)).toEqual([]);
     const ids = r.manifest.courses.map((c) => c.id).sort();
-    expect(ids).toEqual(['demo', 'python-basics', 'python-intermediate']);
+    expect(ids).toEqual([
+      'demo',
+      'python-basics',
+      'python-files-data',
+      'python-intermediate',
+      'python-testing-debugging',
+    ]);
     const basics = r.manifest.courses.find((c) => c.id === 'python-basics');
     expect(basics?.modules).toHaveLength(3);
     for (const mod of basics?.modules ?? []) {

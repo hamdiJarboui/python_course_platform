@@ -2,7 +2,13 @@ import { describe, expect, it } from 'vitest';
 import { gradeQuiz, isCorrect, normalizeShort, shuffled } from './quiz';
 import type { Question } from './types';
 
-const single: Question = { type: 'single', q: 'q', options: ['a', 'b', 'c'], answer: 1, explain: 'e' };
+const single: Question = {
+  type: 'single',
+  q: 'q',
+  options: ['a', 'b', 'c'],
+  answer: 1,
+  explain: 'e',
+};
 const multiple: Question = {
   type: 'multiple',
   q: 'q',
@@ -12,7 +18,13 @@ const multiple: Question = {
 };
 const bool: Question = { type: 'boolean', q: 'q', answer: false, explain: 'e' };
 const short: Question = { type: 'short', q: 'q', answer: ['def', 'DEF keyword'], explain: 'e' };
-const shortCs: Question = { type: 'short', q: 'q', answer: ['None'], caseSensitive: true, explain: 'e' };
+const shortCs: Question = {
+  type: 'short',
+  q: 'q',
+  answer: ['None'],
+  caseSensitive: true,
+  explain: 'e',
+};
 
 describe('normalizeShort', () => {
   it('trims, collapses whitespace and lowercases by default', () => {
@@ -81,7 +93,10 @@ describe('gradeQuiz', () => {
   });
 
   it('never passes an empty quiz', () => {
-    expect(gradeQuiz({ passScore: 0, questions: [] }, [])).toMatchObject({ score: 0, passed: false });
+    expect(gradeQuiz({ passScore: 0, questions: [] }, [])).toMatchObject({
+      score: 0,
+      passed: false,
+    });
   });
 });
 

@@ -25,8 +25,14 @@ export default tseslint.config(
     rules: {
       ...reactHooks.configs.recommended.rules,
       '@typescript-eslint/no-explicit-any': 'error',
-      '@typescript-eslint/consistent-type-imports': ['error', { fixStyle: 'separate-type-imports' }],
-      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        { fixStyle: 'separate-type-imports' },
+      ],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      ],
       // AGENTS.md: no default exports (pages export a named `Component` for the router).
       'no-restricted-syntax': [
         'error',

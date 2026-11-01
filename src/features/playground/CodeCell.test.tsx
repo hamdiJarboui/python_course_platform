@@ -17,17 +17,30 @@ vi.mock('@/runtime', () => ({
 }));
 // The real editor is CodeMirror (needs layout); a textarea stands in for it here.
 vi.mock('./CodeEditor', () => ({
-  CodeEditor: ({ value, onChange, label }: { value: string; onChange?: (v: string) => void; label: string }) => (
-    <textarea aria-label={label} value={value} onChange={(e) => onChange?.(e.target.value)} />
-  ),
+  CodeEditor: ({
+    value,
+    onChange,
+    label,
+  }: {
+    value: string;
+    onChange?: (v: string) => void;
+    label: string;
+  }) => <textarea aria-label={label} value={value} onChange={(e) => onChange?.(e.target.value)} />,
 }));
 
 const { CodeCell } = await import('./CodeCell');
 const { ExerciseCell } = await import('./ExerciseCell');
 const { LessonRunProvider } = await import('./context');
 
-const lesson = { courseId: 'c', lessonId: 'c/m/l', scope: 'lesson' as const, setup: 'X = 1', packages: [] };
-const wrap = (ui: React.ReactNode) => render(<LessonRunProvider value={lesson}>{ui}</LessonRunProvider>);
+const lesson = {
+  courseId: 'c',
+  lessonId: 'c/m/l',
+  scope: 'lesson' as const,
+  setup: 'X = 1',
+  packages: [],
+};
+const wrap = (ui: React.ReactNode) =>
+  render(<LessonRunProvider value={lesson}>{ui}</LessonRunProvider>);
 
 const cell: CodeCellData = {
   id: 'cell-1',
@@ -57,7 +70,12 @@ describe('CodeCell', () => {
     await waitFor(() => expect(out).toHaveTextContent('hello'));
     expect(out).toHaveTextContent('→ 42');
     expect(run).toHaveBeenCalledWith(
-      expect.objectContaining({ code: 'print(1)', timeoutMs: 5000, namespace: 'c/m/l', setup: 'X = 1' }),
+      expect.objectContaining({
+        code: 'print(1)',
+        timeoutMs: 5000,
+        namespace: 'c/m/l',
+        setup: 'X = 1',
+      }),
       expect.any(Object),
     );
   });
@@ -81,7 +99,11 @@ describe('CodeCell', () => {
     let signal: AbortSignal | undefined;
     run.mockImplementation((req: { signal: AbortSignal }) => {
       signal = req.signal;
-      return new Promise((resolve) => req.signal.addEventListener('abort', () => resolve({ ...ok, status: 'stopped', error: 'Stopped' })));
+      return new Promise((resolve) =>
+        req.signal.addEventListener('abort', () =>
+          resolve({ ...ok, status: 'stopped', error: 'Stopped' }),
+        ),
+      );
     });
     const user = userEvent.setup();
     wrap(<CodeCell cell={cell} />);
@@ -139,7 +161,10 @@ describe('ExerciseCell', () => {
   });
 
   it('shows failures, reveals the solution only after an attempt, and keeps progress on pass', async () => {
-    runExercise.mockResolvedValueOnce({ ...base, failures: [{ message: 'add(1, 2) should be 3', test: null }] });
+    runExercise.mockResolvedValueOnce({
+      ...base,
+      failures: [{ message: 'add(1, 2) should be 3', test: null }],
+    });
     const user = userEvent.setup();
     wrap(<ExerciseCell exercise={exercise} />);
     expect(screen.queryByRole('button', { name: /show solution/i })).not.toBeInTheDocument();
@@ -159,7 +184,11 @@ describe('ExerciseCell', () => {
   });
 
   it('does not record an attempt when the check timed out', async () => {
-    runExercise.mockResolvedValueOnce({ ...base, status: 'timeout', error: 'TimeoutError: too slow' });
+    runExercise.mockResolvedValueOnce({
+      ...base,
+      status: 'timeout',
+      error: 'TimeoutError: too slow',
+    });
     const user = userEvent.setup();
     wrap(<ExerciseCell exercise={exercise} />);
     await user.click(screen.getByRole('button', { name: /check/i }));

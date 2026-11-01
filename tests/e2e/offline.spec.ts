@@ -12,7 +12,9 @@ test('after one visit the app and Python run offline', async ({ page, context })
   });
   // Reload so the worker controls the page, then warm the Pyodide cache with a real run.
   await page.reload();
-  await expect.poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller))).toBe(true);
+  await expect
+    .poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller)))
+    .toBe(true);
   const cell = page.getByTestId('cell-run').first();
   await cell.getByRole('button', { name: /run/i }).click();
   await expect(cell.getByTestId('output')).toContainText('Hello, world!', { timeout: 90_000 });

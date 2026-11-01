@@ -5,7 +5,10 @@ import type { Backend, WorkerApi, WorkerHooks, WorkerRunOutput } from './types';
 interface FakeBackend extends Backend {
   terminated: boolean;
   hooks?: WorkerHooks;
-  runImpl: (code: string, hooks: WorkerHooks) => Promise<Omit<WorkerRunOutput, 'stdout' | 'stderr'>>;
+  runImpl: (
+    code: string,
+    hooks: WorkerHooks,
+  ) => Promise<Omit<WorkerRunOutput, 'stdout' | 'stderr'>>;
   loaded: string[][];
 }
 
@@ -43,7 +46,8 @@ function makeFactory(runImpl: FakeBackend['runImpl']) {
         });
         return { ...out, ...buf };
       },
-      runExercise: () => Promise.resolve({ passed: true, failures: [], error: null, stdout: '', stderr: '' }),
+      runExercise: () =>
+        Promise.resolve({ passed: true, failures: [], error: null, stdout: '', stderr: '' }),
       resetNamespace: () => Promise.resolve(),
     };
     backends.push(b);
@@ -74,7 +78,13 @@ describe('PythonRuntime', () => {
 
     const seen: string[] = [];
     const res = await rt.run({ code: 'x' }, { onOutput: (k, t) => seen.push(`${k}:${t}`) });
-    expect(res).toMatchObject({ status: 'ok', stdout: 'hello\n', stderr: 'warn\n', result: '42', error: null });
+    expect(res).toMatchObject({
+      status: 'ok',
+      stdout: 'hello\n',
+      stderr: 'warn\n',
+      result: '42',
+      error: null,
+    });
     expect(seen).toEqual(['stdout:hello\n', 'stderr:warn\n']);
     expect(backends).toHaveLength(1);
 
@@ -84,7 +94,9 @@ describe('PythonRuntime', () => {
   });
 
   it('reports a Python error from the worker', async () => {
-    const { factory } = makeFactory(() => Promise.resolve({ ok: false, result: null, error: 'ValueError: boom' }));
+    const { factory } = makeFactory(() =>
+      Promise.resolve({ ok: false, result: null, error: 'ValueError: boom' }),
+    );
     const res = await new PythonRuntime(factory).run({ code: 'x' });
     expect(res).toMatchObject({ status: 'error', error: 'ValueError: boom' });
   });
@@ -205,7 +217,10 @@ describe('PythonRuntime', () => {
       const b = factory();
       return {
         ...b,
-        api: { ...b.api, run: () => Promise.resolve({ ...ok(), stdout: 'from result\n', stderr: '' }) },
+        api: {
+          ...b.api,
+          run: () => Promise.resolve({ ...ok(), stdout: 'from result\n', stderr: '' }),
+        },
       };
     });
     expect((await rt.run({ code: 'x' })).stdout).toBe('from result\n');
@@ -226,7 +241,8 @@ describe('PythonRuntime', () => {
           init: () => (failing ? Promise.reject(new Error('network down')) : Promise.resolve()),
           loadPackages: () => Promise.resolve(),
           run: () => Promise.resolve({ ...ok('1'), stdout: '', stderr: '' }),
-          runExercise: () => Promise.resolve({ passed: true, failures: [], error: null, stdout: '', stderr: '' }),
+          runExercise: () =>
+            Promise.resolve({ passed: true, failures: [], error: null, stdout: '', stderr: '' }),
           resetNamespace: () => Promise.resolve(),
         },
       } as unknown as FakeBackend;

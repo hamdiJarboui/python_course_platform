@@ -21,9 +21,13 @@ for (const theme of ['light', 'dark'] as const) {
         await expect(page.getByRole('main')).toBeVisible();
         // Let lazily loaded content (lesson JSON, editor chunk, search index) settle.
         await page.waitForLoadState('networkidle');
-        const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+        const results = await new AxeBuilder({ page })
+          .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+          .analyze();
         expect(
-          results.violations.map((v) => `${v.id}: ${v.help} (${v.nodes.length}) ${v.nodes[0]?.target.join(' ')}`),
+          results.violations.map(
+            (v) => `${v.id}: ${v.help} (${v.nodes.length}) ${v.nodes[0]?.target.join(' ')}`,
+          ),
         ).toEqual([]);
       });
     }
@@ -35,7 +39,9 @@ for (const theme of ['light', 'dark'] as const) {
       await page.getByRole('button', { name: /submit answers/i }).click();
       await expect(page.getByTestId('quiz-result')).toBeVisible();
       const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze();
-      expect(results.violations.map((v) => `${v.id}: ${v.help} ${v.nodes[0]?.target.join(' ')}`)).toEqual([]);
+      expect(
+        results.violations.map((v) => `${v.id}: ${v.help} ${v.nodes[0]?.target.join(' ')}`),
+      ).toEqual([]);
     });
   });
 }

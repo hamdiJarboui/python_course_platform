@@ -40,9 +40,20 @@ export function CourseShell({ course, currentId, children }: Props) {
           >
             ☰ Course menu
           </button>
-          {open && <button type="button" className="sidebar__scrim" aria-label="Close menu" onClick={() => setOpen(false)} />}
+          {open && (
+            <button
+              type="button"
+              className="sidebar__scrim"
+              aria-label="Close menu"
+              onClick={() => setOpen(false)}
+            />
+          )}
           <div className="sidebar__panel" id="course-sidebar">
-            <CourseNav course={course} {...(currentId !== undefined && { currentId })} onNavigate={() => setOpen(false)} />
+            <CourseNav
+              course={course}
+              {...(currentId !== undefined && { currentId })}
+              onNavigate={() => setOpen(false)}
+            />
           </div>
         </aside>
         <div className="lesson-main" id="content">

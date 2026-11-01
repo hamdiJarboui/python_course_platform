@@ -24,7 +24,10 @@ interface PyProxyLike {
   destroy(): void;
 }
 interface HarnessModule {
-  set_hooks(write: (kind: string, text: string) => void, input: (prompt: string) => Promise<string | null>): void;
+  set_hooks(
+    write: (kind: string, text: string) => void,
+    input: (prompt: string) => Promise<string | null>,
+  ): void;
   run(source: string, namespace: string | undefined, setup: string): Promise<PyProxyLike>;
   run_exercise(source: string, tests: string, setup: string): Promise<PyProxyLike>;
   reset_namespace(namespace?: string): void;
@@ -113,7 +116,9 @@ const api: WorkerApi = {
   async runExercise({ code, tests, setup }): Promise<WorkerExerciseOutput> {
     resetCapture();
     const raw = await need(harness, 'Python').run_exercise(code, tests, setup ?? '');
-    const out = toObject<{ passed: boolean; failures: ExerciseFailure[]; error?: string | null }>(raw);
+    const out = toObject<{ passed: boolean; failures: ExerciseFailure[]; error?: string | null }>(
+      raw,
+    );
     const failures = out.failures.map((f) => ({ message: f.message, test: f.test ?? null }));
     return {
       passed: out.passed,

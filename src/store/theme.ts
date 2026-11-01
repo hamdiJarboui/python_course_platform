@@ -5,7 +5,10 @@ import type { ResolvedTheme, ThemeMode } from '@/core/theme';
 /** Small external store: the mode lives in localStorage, the resolved theme on <html data-theme>. */
 let mode: ThemeMode = readMode();
 const listeners = new Set<() => void>();
-const media = typeof window !== 'undefined' && window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : undefined;
+const media =
+  typeof window !== 'undefined' && window.matchMedia
+    ? window.matchMedia('(prefers-color-scheme: dark)')
+    : undefined;
 
 function readMode(): ThemeMode {
   try {

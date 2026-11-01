@@ -22,7 +22,11 @@ function Rich({ text }: { text: string }) {
   return (
     <>
       {parts.map((p, i) =>
-        p.startsWith('`') && p.endsWith('`') && p.length > 2 ? <code key={i}>{p.slice(1, -1)}</code> : <span key={i}>{p}</span>,
+        p.startsWith('`') && p.endsWith('`') && p.length > 2 ? (
+          <code key={i}>{p.slice(1, -1)}</code>
+        ) : (
+          <span key={i}>{p}</span>
+        ),
       )}
     </>
   );
@@ -93,7 +97,9 @@ export function QuizRunner({ courseId, quiz, next, retryTo }: Props) {
           </p>
           <p>
             {result.correctCount} of {result.total} correct · pass mark {quiz.passScore}%
-            {best ? ` · best ${best.best}% in ${best.attempts} attempt${best.attempts === 1 ? '' : 's'}` : ''}
+            {best
+              ? ` · best ${best.best}% in ${best.attempts} attempt${best.attempts === 1 ? '' : 's'}`
+              : ''}
           </p>
           <p>
             {result.passed
@@ -131,7 +137,13 @@ export function QuizRunner({ courseId, quiz, next, retryTo }: Props) {
       <ol className="dots" aria-hidden="true">
         {questions.map((q, i) => {
           const r = result?.results[i];
-          const state = r ? (r.correct ? 'correct' : 'wrong') : isAnswered(q, answers[i]) ? 'answered' : 'open';
+          const state = r
+            ? r.correct
+              ? 'correct'
+              : 'wrong'
+            : isAnswered(q, answers[i])
+              ? 'answered'
+              : 'open';
           return <li key={i} data-state={state} />;
         })}
       </ol>
@@ -201,7 +213,10 @@ function QuestionView({ index, question, answer, onAnswer, reviewed }: QuestionP
       <legend>
         Question {index + 1}
         {reviewed && (
-          <span className={`badge ${reviewed.correct ? 'badge--success' : ''}`} style={{ marginLeft: 8 }}>
+          <span
+            className={`badge ${reviewed.correct ? 'badge--success' : ''}`}
+            style={{ marginLeft: 8 }}
+          >
             {reviewed.correct ? '✓ Correct' : '✗ Incorrect'}
           </span>
         )}
@@ -231,7 +246,11 @@ function QuestionView({ index, question, answer, onAnswer, reviewed }: QuestionP
                 name={name}
                 checked={current.includes(oi)}
                 onChange={(e) =>
-                  onAnswer(e.target.checked ? [...current, oi].sort((a, b) => a - b) : current.filter((x) => x !== oi))
+                  onAnswer(
+                    e.target.checked
+                      ? [...current, oi].sort((a, b) => a - b)
+                      : current.filter((x) => x !== oi),
+                  )
                 }
               />
               <span>

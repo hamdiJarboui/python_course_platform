@@ -34,10 +34,13 @@ async function main(): Promise<void> {
     if (r.status !== 0) throw new Error('pnpm build failed');
   }
 
-  const manifest = JSON.parse(await readFile(`${root}src/generated/manifest.json`, 'utf8')) as Manifest;
+  const manifest = JSON.parse(
+    await readFile(`${root}src/generated/manifest.json`, 'utf8'),
+  ) as Manifest;
   const wanted = process.argv.slice(2);
   const courses = manifest.courses.filter((c) => wanted.length === 0 || wanted.includes(c.id));
-  if (courses.length === 0) throw new Error(`No matching course (${wanted.join(', ') || 'none in manifest'})`);
+  if (courses.length === 0)
+    throw new Error(`No matching course (${wanted.join(', ') || 'none in manifest'})`);
 
   await mkdir(outDir, { recursive: true });
   let existing: PdfManifest = {};
@@ -62,12 +65,17 @@ async function main(): Promise<void> {
   try {
     for (const course of courses) {
       const started = Date.now();
-      const context = await browser.newContext({ viewport: { width: 1000, height: 1400 }, serviceWorkers: 'block' });
+      const context = await browser.newContext({
+        viewport: { width: 1000, height: 1400 },
+        serviceWorkers: 'block',
+      });
       const page = await context.newPage();
       page.on('pageerror', (e) => console.error(`  [page error] ${e.message}`));
       await page.goto(`${origin}${base}print/${course.id}?print=1`);
       process.stdout.write(`• ${course.title}: running code cells… `);
-      await page.waitForFunction(() => window.__PRINT_READY__ === true, undefined, { timeout: timeoutMs });
+      await page.waitForFunction(() => window.__PRINT_READY__ === true, undefined, {
+        timeout: timeoutMs,
+      });
       const warnings = await page.locator('.print-warning').count();
 
       const file = `${course.id}.pdf`;
@@ -89,7 +97,13 @@ async function main(): Promise<void> {
 
       const bytes = (await stat(`${outDir}/${file}`)).size;
       const pages = (await PDFDocument.load(await readFile(`${outDir}/${file}`))).getPageCount();
-      existing[course.id] = { file, bytes, version: course.version, generatedAt: new Date().toISOString(), pages };
+      existing[course.id] = {
+        file,
+        bytes,
+        version: course.version,
+        generatedAt: new Date().toISOString(),
+        pages,
+      };
       console.log(
         `${pages} pages, ${(bytes / 1024).toFixed(0)} KB, ${((Date.now() - started) / 1000).toFixed(1)} s` +
           (warnings > 0 ? `  ⚠ ${warnings} cell(s) without output` : ''),

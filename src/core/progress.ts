@@ -1,11 +1,4 @@
-import type {
-  Course,
-  CourseProgress,
-  ID,
-  Module,
-  ProgressV1,
-  QuizResult,
-} from './types';
+import type { Course, CourseProgress, ID, Module, ProgressV1, QuizResult } from './types';
 
 export const PROGRESS_VERSION = 1;
 
@@ -156,7 +149,11 @@ export function isModuleComplete(progress: ProgressV1, course: Course, mod: Modu
  * `gating: quiz` → module n+1 stays locked until the quiz of every earlier module has been passed.
  * `gating: none` → nothing is ever locked (the UI only shows a nudge).
  */
-export function isModuleUnlocked(progress: ProgressV1, course: Course, moduleIndex: number): boolean {
+export function isModuleUnlocked(
+  progress: ProgressV1,
+  course: Course,
+  moduleIndex: number,
+): boolean {
   if (course.gating === 'none') return true;
   for (let i = 0; i < moduleIndex; i++) {
     const prev = course.modules[i];
@@ -166,7 +163,11 @@ export function isModuleUnlocked(progress: ProgressV1, course: Course, moduleInd
 }
 
 /** True when the previous module's quiz is not passed yet (used for the soft nudge). */
-export function previousQuizPending(progress: ProgressV1, course: Course, moduleIndex: number): boolean {
+export function previousQuizPending(
+  progress: ProgressV1,
+  course: Course,
+  moduleIndex: number,
+): boolean {
   const prev = course.modules[moduleIndex - 1];
   return prev !== undefined && !isQuizPassed(progress, course.id, prev.quiz.id);
 }
@@ -184,9 +185,12 @@ export interface ResumeTarget {
 /** Ordered list of everything learnable in a course: lessons then the module quiz, per module. */
 export function courseSequence(course: Course): ResumeTarget[] {
   return course.modules.flatMap((mod) => [
-    ...mod.lessons.map(
-      (l): ResumeTarget => ({ kind: 'lesson', moduleSlug: mod.slug, slug: l.slug, id: l.id }),
-    ),
+    ...mod.lessons.map((l): ResumeTarget => ({
+      kind: 'lesson',
+      moduleSlug: mod.slug,
+      slug: l.slug,
+      id: l.id,
+    })),
     { kind: 'quiz', moduleSlug: mod.slug, slug: 'quiz', id: mod.quiz.id } satisfies ResumeTarget,
   ]);
 }

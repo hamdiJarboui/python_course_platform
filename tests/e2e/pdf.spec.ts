@@ -9,7 +9,10 @@ import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs';
  */
 const dir = fileURLToPath(new URL('../../public/pdf/', import.meta.url));
 const manifest = JSON.parse(
-  readFileSync(fileURLToPath(new URL('../../src/generated/manifest.json', import.meta.url)), 'utf8'),
+  readFileSync(
+    fileURLToPath(new URL('../../src/generated/manifest.json', import.meta.url)),
+    'utf8',
+  ),
 ) as { courses: { id: string; title: string; modules: unknown[] }[] };
 
 for (const course of manifest.courses) {

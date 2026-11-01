@@ -25,7 +25,10 @@ const plain = (s: string): string => s.replace(/`/g, '');
 
 function fieldsetFor(page: Page, q: QuizQuestion): Locator {
   // The question text is unique within a quiz; `has` avoids partial matches between similar questions.
-  return page.locator('fieldset').filter({ has: page.getByText(plain(q.q), { exact: false }) }).first();
+  return page
+    .locator('fieldset')
+    .filter({ has: page.getByText(plain(q.q), { exact: false }) })
+    .first();
 }
 
 /** Answers every question correctly (or deliberately wrong when `correct` is false). */
@@ -42,17 +45,24 @@ export async function answerQuiz(page: Page, quiz: QuizJson, correct = true): Pr
         const answers = q.answer as number[];
         const boxes = box.getByRole('checkbox');
         const total = await boxes.count();
-        const chosen = correct ? answers : [[...Array(total).keys()].find((i) => !answers.includes(i)) ?? 0];
+        const chosen = correct
+          ? answers
+          : [[...Array(total).keys()].find((i) => !answers.includes(i)) ?? 0];
         for (const i of chosen) await boxes.nth(i).check();
         break;
       }
       case 'boolean': {
         const value = correct ? (q.answer as boolean) : !(q.answer as boolean);
-        await box.getByRole('radio').nth(value ? 0 : 1).check();
+        await box
+          .getByRole('radio')
+          .nth(value ? 0 : 1)
+          .check();
         break;
       }
       case 'short':
-        await box.getByRole('textbox').fill(correct ? (q.answer as string[])[0] ?? '' : 'definitely wrong');
+        await box
+          .getByRole('textbox')
+          .fill(correct ? ((q.answer as string[])[0] ?? '') : 'definitely wrong');
         break;
     }
   }

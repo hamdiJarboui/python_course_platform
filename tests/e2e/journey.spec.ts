@@ -5,12 +5,17 @@ const COURSE = 'python-basics';
 const MODULE = '01-getting-started';
 
 test.describe('learner journey', () => {
-  test('open course → run code → complete lesson → pass quiz → progress survives reload', async ({ page }) => {
+  test('open course → run code → complete lesson → pass quiz → progress survives reload', async ({
+    page,
+  }) => {
     await page.goto('/');
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
 
     // Catalog → course overview → first lesson.
-    await page.getByTestId(`course-card-${COURSE}`).getByRole('link', { name: /start course/i }).click();
+    await page
+      .getByTestId(`course-card-${COURSE}`)
+      .getByRole('link', { name: /start course/i })
+      .click();
     await expect(page).toHaveURL(new RegExp(`/c/${COURSE}$`));
     await page.getByRole('link', { name: /start the course/i }).click();
     await expect(page).toHaveURL(new RegExp(`/c/${COURSE}/${MODULE}/01-hello-python`));
@@ -18,14 +23,18 @@ test.describe('learner journey', () => {
     // Run the first example in real Pyodide (first run downloads Python, so allow time).
     const firstCell = page.getByTestId('cell-run').first();
     await firstCell.getByRole('button', { name: /run/i }).click();
-    await expect(firstCell.getByTestId('output')).toContainText('Hello, world!', { timeout: 60_000 });
+    await expect(firstCell.getByTestId('output')).toContainText('Hello, world!', {
+      timeout: 60_000,
+    });
 
     // Mark the lesson complete; it shows in the sidebar and survives a reload.
     await page.getByRole('button', { name: /mark complete/i }).click();
     await expect(page.getByRole('button', { name: /completed/i })).toBeVisible();
     await page.reload();
     await expect(page.getByRole('button', { name: /completed/i })).toBeVisible();
-    await expect(page.getByRole('navigation', { name: /contents/i }).getByText('Hello, Python')).toBeVisible();
+    await expect(
+      page.getByRole('navigation', { name: /contents/i }).getByText('Hello, Python'),
+    ).toBeVisible();
 
     // Pass the module quiz.
     await page.goto(`/c/${COURSE}/${MODULE}/quiz`);

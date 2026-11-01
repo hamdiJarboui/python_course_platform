@@ -25,7 +25,10 @@ function pythonCandidates(): string[] {
   return [process.env['PYTHON'], 'python3', 'python'].filter((c): c is string => Boolean(c));
 }
 
-function runPython(cmd: string, input: string): Promise<{ code: number | null; stdout: string; stderr: string; missing: boolean }> {
+function runPython(
+  cmd: string,
+  input: string,
+): Promise<{ code: number | null; stdout: string; stderr: string; missing: boolean }> {
   return new Promise((resolve) => {
     const child = spawn(cmd, ['-I', runner], { stdio: ['pipe', 'pipe', 'pipe'] });
     let stdout = '';
@@ -51,7 +54,13 @@ function runPython(cmd: string, input: string): Promise<{ code: number | null; s
 async function verifyLesson(lesson: VerifyLesson, python: string): Promise<Problem[]> {
   const r = await runPython(python, JSON.stringify(lesson));
   if (r.code !== 0) {
-    return [{ kind: 'runner', id: lesson.id, message: `Python runner failed (exit ${r.code}): ${r.stderr.trim()}` }];
+    return [
+      {
+        kind: 'runner',
+        id: lesson.id,
+        message: `Python runner failed (exit ${r.code}): ${r.stderr.trim()}`,
+      },
+    ];
   }
   return JSON.parse(r.stdout) as Problem[];
 }
@@ -74,7 +83,9 @@ async function main(): Promise<void> {
     }
   }
   if (!python) {
-    console.error('No working Python 3.9+ found. Install Python or set the PYTHON environment variable.');
+    console.error(
+      'No working Python 3.9+ found. Install Python or set the PYTHON environment variable.',
+    );
     process.exit(1);
   }
 
@@ -94,7 +105,9 @@ async function main(): Promise<void> {
   }
 
   if (failures > 0) {
-    console.error(`\ncontent:verify failed: ${failures} problem(s) in ${result.verify.length} lesson(s)`);
+    console.error(
+      `\ncontent:verify failed: ${failures} problem(s) in ${result.verify.length} lesson(s)`,
+    );
     process.exit(1);
   }
   console.log(

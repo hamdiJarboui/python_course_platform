@@ -48,12 +48,7 @@ export function PdfDownload({ course }: { course: Course }) {
     );
   }
   return (
-    <a
-      className="btn"
-      href={`${base()}pdf/${entry.file}`}
-      download
-      data-testid="pdf-download"
-    >
+    <a className="btn" href={`${base()}pdf/${entry.file}`} download data-testid="pdf-download">
       <span aria-hidden="true">⬇</span> Download PDF
       <span className="meta" style={{ margin: 0 }}>
         {formatBytes(entry.bytes)} · v{entry.version}

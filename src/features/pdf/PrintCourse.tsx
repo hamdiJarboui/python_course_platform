@@ -57,7 +57,9 @@ function answerText(q: Question): string {
     case 'single':
       return `${String.fromCharCode(65 + q.answer)}. ${q.options[q.answer] ?? ''}`;
     case 'multiple':
-      return q.answer.map((i) => `${String.fromCharCode(65 + i)}. ${q.options[i] ?? ''}`).join('; ');
+      return q.answer
+        .map((i) => `${String.fromCharCode(65 + i)}. ${q.options[i] ?? ''}`)
+        .join('; ');
     case 'boolean':
       return q.answer ? 'True' : 'False';
     case 'short':
@@ -117,7 +119,12 @@ export function PrintCourse({ course }: { course: Course }) {
             );
             setOutputs((o) => ({
               ...o,
-              [key]: { stdout: res.stdout, stderr: res.stderr, result: res.result, failed: res.status !== 'ok' && res.stdout === '' && res.stderr === '' },
+              [key]: {
+                stdout: res.stdout,
+                stderr: res.stderr,
+                result: res.result,
+                failed: res.status !== 'ok' && res.stdout === '' && res.stderr === '',
+              },
             }));
           }
         }
@@ -190,7 +197,13 @@ export function PrintCourse({ course }: { course: Course }) {
                 <article key={meta.id} className="print-lesson">
                   {lesson.blocks.map((b, i) => {
                     if (b.type === 'html') {
-                      return <div key={i} className="prose" dangerouslySetInnerHTML={{ __html: shiftHeadings(b.html) }} />;
+                      return (
+                        <div
+                          key={i}
+                          className="prose"
+                          dangerouslySetInnerHTML={{ __html: shiftHeadings(b.html) }}
+                        />
+                      );
                     }
                     if (b.type === 'cell') {
                       const out = outputs[`${lesson.id}#${b.cell.id}`];
@@ -202,17 +215,28 @@ export function PrintCourse({ course }: { course: Course }) {
                                 <span className="cell__title">{b.cell.title}</span>
                               </div>
                             )}
-                            <div className="cell__editor" dangerouslySetInnerHTML={{ __html: b.cell.html }} />
+                            <div
+                              className="cell__editor"
+                              dangerouslySetInnerHTML={{ __html: b.cell.html }}
+                            />
                           </div>
                           <div className="print-cell__output" aria-label="Output">
                             {!out && <span className="print-cell--running" />}
-                            {out?.failed && <span className="print-warning">⚠ output unavailable</span>}
-                            {out && out.stdout !== '' && <pre>{out.stdout}</pre>}
-                            {out && out.stderr !== '' && <pre className="out-stderr">{out.stderr}</pre>}
-                            {out?.result != null && <pre className="out-result">{`→ ${out.result}`}</pre>}
-                            {out && !out.failed && out.stdout === '' && out.stderr === '' && out.result === null && (
-                              <span className="out-empty">(no output)</span>
+                            {out?.failed && (
+                              <span className="print-warning">⚠ output unavailable</span>
                             )}
+                            {out && out.stdout !== '' && <pre>{out.stdout}</pre>}
+                            {out && out.stderr !== '' && (
+                              <pre className="out-stderr">{out.stderr}</pre>
+                            )}
+                            {out?.result != null && (
+                              <pre className="out-result">{`→ ${out.result}`}</pre>
+                            )}
+                            {out &&
+                              !out.failed &&
+                              out.stdout === '' &&
+                              out.stderr === '' &&
+                              out.result === null && <span className="out-empty">(no output)</span>}
                           </div>
                         </Fragment>
                       );
@@ -220,9 +244,14 @@ export function PrintCourse({ course }: { course: Course }) {
                     return (
                       <div key={i} className="cell exercise">
                         <div className="cell__bar">
-                          <span className="cell__title exercise__label">✎ Exercise — solution in the answer key</span>
+                          <span className="cell__title exercise__label">
+                            ✎ Exercise — solution in the answer key
+                          </span>
                         </div>
-                        <div className="cell__editor" dangerouslySetInnerHTML={{ __html: b.exercise.starterHtml }} />
+                        <div
+                          className="cell__editor"
+                          dangerouslySetInnerHTML={{ __html: b.exercise.starterHtml }}
+                        />
                       </div>
                     );
                   })}
@@ -232,7 +261,9 @@ export function PrintCourse({ course }: { course: Course }) {
             {quiz && (
               <section className="print-lesson">
                 <h2>{quiz.title}</h2>
-                <p className="meta">Pass mark {quiz.passScore}% · answers are in the answer key at the end.</p>
+                <p className="meta">
+                  Pass mark {quiz.passScore}% · answers are in the answer key at the end.
+                </p>
                 {quiz.questions.map((q, i) => (
                   <QuestionPrint key={i} q={q} n={i + 1} />
                 ))}

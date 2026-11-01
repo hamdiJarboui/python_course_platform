@@ -1,7 +1,9 @@
 import { z } from 'zod';
 import type { Manifest } from './types';
 
-const slug = z.string().regex(/^[a-z0-9][a-z0-9-]*$/, 'must be lowercase letters, digits and dashes');
+const slug = z
+  .string()
+  .regex(/^[a-z0-9][a-z0-9-]*$/, 'must be lowercase letters, digits and dashes');
 
 export const courseYmlSchema = z.object({
   id: slug,

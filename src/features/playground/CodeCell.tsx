@@ -61,7 +61,12 @@ export function CodeCell({ cell }: Props) {
       </div>
       {editable ? (
         <Suspense fallback={<StaticCode html={cell.html} />}>
-          <CodeEditor value={code} onChange={setCode} onRun={doRun} label={`Python editor: ${title}`} />
+          <CodeEditor
+            value={code}
+            onChange={setCode}
+            onRun={doRun}
+            label={`Python editor: ${title}`}
+          />
         </Suspense>
       ) : (
         <StaticCode html={cell.html} />
