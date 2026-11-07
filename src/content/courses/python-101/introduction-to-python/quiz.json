@@ -1,0 +1,94 @@
+{
+  "id": "introduction-to-python-quiz",
+  "moduleId": "introduction-to-python",
+  "title": "Introduction to Python checkpoint",
+  "passScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Which lesson belongs to the Introduction to Python module?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Welcome to Python"
+        },
+        {
+          "id": "b",
+          "label": "Unrelated topic"
+        },
+        {
+          "id": "c",
+          "label": "A different course"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Welcome to Python is part of this module."
+    },
+    {
+      "id": "q2",
+      "type": "multiple",
+      "prompt": "Which habits support effective Python learning?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Run small experiments"
+        },
+        {
+          "id": "b",
+          "label": "Read error messages"
+        },
+        {
+          "id": "c",
+          "label": "Never change examples"
+        }
+      ],
+      "correct": [
+        "a",
+        "b"
+      ],
+      "explanation": "Small experiments and error messages turn concepts into durable skills."
+    },
+    {
+      "id": "q3",
+      "type": "true_false",
+      "prompt": "Practice and feedback help build programming skill.",
+      "correct": true,
+      "explanation": "Active practice and feedback are central to learning to program."
+    },
+    {
+      "id": "q4",
+      "type": "short_text",
+      "prompt": "What character starts a Python comment?",
+      "correct": [
+        "#"
+      ],
+      "explanation": "A hash starts a single-line Python comment."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What should you do when an example raises an error?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Read the error and inspect the named line"
+        },
+        {
+          "id": "b",
+          "label": "Close the editor immediately"
+        },
+        {
+          "id": "c",
+          "label": "Ignore it forever"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Errors are useful feedback. Read them, locate the line, and make a focused change."
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "data-structures",
+  "title": "Data Structures",
+  "description": "Store and shape information with Python\u2019s core collections.",
+  "order": 5,
+  "lessons": [
+    {
+      "id": "lists",
+      "order": 1,
+      "title": "Lists"
+    },
+    {
+      "id": "tuples",
+      "order": 2,
+      "title": "Tuples"
+    },
+    {
+      "id": "dictionaries",
+      "order": 3,
+      "title": "Dictionaries"
+    },
+    {
+      "id": "sets",
+      "order": 4,
+      "title": "Sets"
+    },
+    {
+      "id": "choosing-the-right-structure",
+      "order": 5,
+      "title": "Choosing the right structure"
+    }
+  ],
+  "quiz": {
+    "id": "data-structures-quiz",
+    "file": "quiz.json"
+  }
+}

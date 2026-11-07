@@ -1,0 +1,37 @@
+{
+  "id": "python-basics",
+  "title": "Python Basics",
+  "description": "Use variables, types, operators, strings, and input to express useful programs.",
+  "order": 2,
+  "lessons": [
+    {
+      "id": "variables-and-names",
+      "order": 1,
+      "title": "Variables and names"
+    },
+    {
+      "id": "data-types",
+      "order": 2,
+      "title": "Data types"
+    },
+    {
+      "id": "numbers-and-math",
+      "order": 3,
+      "title": "Numbers and math"
+    },
+    {
+      "id": "strings",
+      "order": 4,
+      "title": "Strings"
+    },
+    {
+      "id": "user-input",
+      "order": 5,
+      "title": "User input"
+    }
+  ],
+  "quiz": {
+    "id": "python-basics-quiz",
+    "file": "quiz.json"
+  }
+}
