@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3ac3216a-e810-415c-a5c7-be756b26584e" name="Changes" comment="modified README.md with youssef name" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="13" />
+  </component>
+  <component name="Git.Settings">
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="main" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="docs/architecture-and-tasks" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ycharfi09&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/hamdiJarboui/python_course_platform",
+    "accountId": "70ed0076-603f-4a40-9a90-47bed752a1d7"
+  },
+  "recentNewPullRequestHead": {
+    "server": {
+      "useHttp": false,
+      "host": "github.com",
+      "port": null,
+      "suffix": null
+    },
+    "owner": "hamdiJarboui",
+    "repository": "python_course_platform"
+  }
+}]]></component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="7.1590654024536966E-31" />
+      <entry key="MS500" value="1.0304182836670567E-6" />
+      <entry key="S2" value="0.11406274307994575" />
+      <entry key="S5" value="1.6201332797936814" />
+      <entry key="S10" value="4.007519875734805" />
+      <entry key="S30" value="7.365998323231937" />
+      <entry key="S60" value="8.581601330591393" />
+      <entry key="M2" value="9.26361666355134" />
+      <entry key="M5" value="9.839182105255153" />
+      <entry key="M10" value="11.371658471805139" />
+      <entry key="M15" value="13.801128849252281" />
+      <entry key="M30" value="21.72550188061214" />
+      <entry key="H1" value="31.966460053113934" />
+      <entry key="H2" value="40.57293694520032" />
+      <entry key="H4" value="46.212039451167946" />
+      <entry key="D1" value="51.77900027046575" />
+      <entry key="W1" value="52.823233296381574" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0" />
+      <entry key="S60" value="1.0" />
+      <entry key="M2" value="1.0000000000351148" />
+      <entry key="M5" value="1.0000657954190526" />
+      <entry key="M10" value="1.0081114375453872" />
+      <entry key="M15" value="1.04037060139685" />
+      <entry key="M30" value="1.200924367354609" />
+      <entry key="H1" value="1.448245878234936" />
+      <entry key="H2" value="1.6695116714702858" />
+      <entry key="H4" value="1.8182369286889255" />
+      <entry key="D1" value="1.9671188452733224" />
+      <entry key="W1" value="1.995235118228718" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="4.653132864295826E-25" />
+      <entry key="MS500" value="1.3998110589629792E-5" />
+      <entry key="S2" value="0.16585167231948955" />
+      <entry key="S5" value="1.9118208964116632" />
+      <entry key="S10" value="4.541563830953036" />
+      <entry key="S30" value="8.175013319936816" />
+      <entry key="S60" value="9.480714266831026" />
+      <entry key="M2" value="10.211741207189306" />
+      <entry key="M5" value="10.818134805780591" />
+      <entry key="M10" value="12.36908562419041" />
+      <entry key="M15" value="14.834241036105338" />
+      <entry key="M30" value="22.9225241346725" />
+      <entry key="H1" value="33.4125574689414" />
+      <entry key="H2" value="42.241287764064836" />
+      <entry key="H4" value="48.02966705835693" />
+      <entry key="D1" value="53.746012760400276" />
+      <entry key="W1" value="54.818453091694444" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3LCIK9PznGgsE4pfBYYdCe4ozmo" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "#9 on mvpyoussef",
+    "junie.onboarding.icon.badge.shown": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-c59985aa861c-c2ffad84badb-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-261.24374.152" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3ac3216a-e810-415c-a5c7-be756b26584e" name="Changes" comment="" />
+      <created>1792951556457</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1792951556457</updated>
+      <workItem from="1792951557767" duration="4830000" />
+      <workItem from="1793554842526" duration="5323000" />
+    </task>
+    <task id="LOCAL-00001" summary="modified README.md with youssef name">
+      <option name="closed" value="true" />
+      <created>1792951741263</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1792951741264</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="modified README.md with youssef name" />
+    <option name="LAST_COMMIT_MESSAGE" value="modified README.md with youssef name" />
+  </component>
+</project>

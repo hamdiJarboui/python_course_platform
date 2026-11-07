@@ -1,0 +1,37 @@
+{
+  "id": "introduction-to-python",
+  "title": "Introduction to Python",
+  "description": "Meet Python, run your first programs, and learn how to debug with confidence.",
+  "order": 1,
+  "lessons": [
+    {
+      "id": "welcome-to-python",
+      "order": 1,
+      "title": "Welcome to Python"
+    },
+    {
+      "id": "what-is-python",
+      "order": 2,
+      "title": "What is Python?"
+    },
+    {
+      "id": "installing-python",
+      "order": 3,
+      "title": "Installing Python"
+    },
+    {
+      "id": "running-your-first-program",
+      "order": 4,
+      "title": "Running your first program"
+    },
+    {
+      "id": "understanding-errors",
+      "order": 5,
+      "title": "Understanding errors"
+    }
+  ],
+  "quiz": {
+    "id": "introduction-to-python-quiz",
+    "file": "quiz.json"
+  }
+}

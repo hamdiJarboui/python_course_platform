@@ -1,0 +1,37 @@
+{
+  "id": "final-project",
+  "title": "Final Project",
+  "description": "Plan, build, debug, and present a small console application.",
+  "order": 6,
+  "lessons": [
+    {
+      "id": "plan-a-python-project",
+      "order": 1,
+      "title": "Plan a Python project"
+    },
+    {
+      "id": "build-a-console-application",
+      "order": 2,
+      "title": "Build a console application"
+    },
+    {
+      "id": "debug-and-improve",
+      "order": 3,
+      "title": "Debug and improve"
+    },
+    {
+      "id": "present-your-project",
+      "order": 4,
+      "title": "Present your project"
+    },
+    {
+      "id": "next-steps",
+      "order": 5,
+      "title": "Next steps"
+    }
+  ],
+  "quiz": {
+    "id": "final-project-quiz",
+    "file": "quiz.json"
+  }
+}

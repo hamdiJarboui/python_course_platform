@@ -1,0 +1,37 @@
+{
+  "id": "control-flow",
+  "title": "Control Flow",
+  "description": "Make decisions and repeat work with conditions and loops.",
+  "order": 3,
+  "lessons": [
+    {
+      "id": "boolean-logic",
+      "order": 1,
+      "title": "Boolean logic"
+    },
+    {
+      "id": "if-statements",
+      "order": 2,
+      "title": "If statements"
+    },
+    {
+      "id": "else-and-elif",
+      "order": 3,
+      "title": "Else and elif"
+    },
+    {
+      "id": "while-loops",
+      "order": 4,
+      "title": "While loops"
+    },
+    {
+      "id": "for-loops",
+      "order": 5,
+      "title": "For loops"
+    }
+  ],
+  "quiz": {
+    "id": "control-flow-quiz",
+    "file": "quiz.json"
+  }
+}

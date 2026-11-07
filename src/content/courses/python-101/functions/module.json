@@ -1,0 +1,37 @@
+{
+  "id": "functions",
+  "title": "Functions",
+  "description": "Organize programs into reusable, testable functions.",
+  "order": 4,
+  "lessons": [
+    {
+      "id": "defining-functions",
+      "order": 1,
+      "title": "Defining functions"
+    },
+    {
+      "id": "parameters-and-arguments",
+      "order": 2,
+      "title": "Parameters and arguments"
+    },
+    {
+      "id": "return-values",
+      "order": 3,
+      "title": "Return values"
+    },
+    {
+      "id": "scope",
+      "order": 4,
+      "title": "Scope"
+    },
+    {
+      "id": "built-in-functions",
+      "order": 5,
+      "title": "Built-in functions"
+    }
+  ],
+  "quiz": {
+    "id": "functions-quiz",
+    "file": "quiz.json"
+  }
+}

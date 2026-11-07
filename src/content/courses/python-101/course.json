@@ -1,0 +1,32 @@
+{
+  "id": "python-101",
+  "title": "Python Foundations",
+  "description": "A complete beginner-friendly path from your first print statement to a small, well-structured Python project.",
+  "version": "1.0.0",
+  "modules": [
+    {
+      "id": "introduction-to-python",
+      "order": 1
+    },
+    {
+      "id": "python-basics",
+      "order": 2
+    },
+    {
+      "id": "control-flow",
+      "order": 3
+    },
+    {
+      "id": "functions",
+      "order": 4
+    },
+    {
+      "id": "data-structures",
+      "order": 5
+    },
+    {
+      "id": "final-project",
+      "order": 6
+    }
+  ]
+}
